@@ -21,6 +21,9 @@ namespace Networking {
             IPEndPoint ep = new IPEndPoint(IPAddress.Any, 666);
             sock.Bind(ep);
         }
+
+        public static event EventHandler ClientConnected;
+
         public static Socket connect() {
             sock.Listen(Int32.MaxValue);
             Debug.WriteLine("Waiting for connection");
@@ -38,6 +41,9 @@ namespace Networking {
             Debug.WriteLine("Connected!");
             Console.WriteLine("Connected!");
             clients.Add("Test", client);
+
+            ClientConnected.BeginInvoke(client, new EventArgs(), null, null);
+
             updateThread = new Thread(Update);
             updateThread.Start();
             return client;

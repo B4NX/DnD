@@ -29,6 +29,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.portBox = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
+            this.username = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // connectBtn
@@ -84,11 +86,29 @@
             this.label3.TabIndex = 3;
             this.label3.Text = "Port:";
             // 
+            // username
+            // 
+            this.username.Location = new System.Drawing.Point(45, 194);
+            this.username.Name = "username";
+            this.username.Size = new System.Drawing.Size(192, 20);
+            this.username.TabIndex = 4;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(45, 175);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(58, 13);
+            this.label4.TabIndex = 5;
+            this.label4.Text = "Username:";
+            // 
             // ClientConnectUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 262);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.username);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -112,5 +132,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox portBox;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox username;
+        private System.Windows.Forms.Label label4;
     }
 }
