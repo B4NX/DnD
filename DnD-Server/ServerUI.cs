@@ -11,10 +11,20 @@ namespace DnD {
     public partial class ServerUI : MainUI {
         public ServerUI() {
             InitializeComponent();
+
+            DungeonMap = new ServerMap(this);
+            DungeonMap.Show(this);
         }
 
         private void reset_Click(object sender, EventArgs e) {
             this.DungeonMap.ResetMap();
+        }
+
+        protected override void sendMsgButton_Click(object sender, EventArgs e) {
+            //log the message, then clear the textbox.
+            string msg = msgEntryBox.Text;
+            logAdventure(msg, "DM");
+            msgEntryBox.Text = "";
         }
 
         protected string parseCommand(string msg) {

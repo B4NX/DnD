@@ -16,15 +16,12 @@ namespace DnD {
 
         public MainUI() {
             InitializeComponent();
-
-            DungeonMap = new DungeonMap(this);
-            DungeonMap.Show(this);
         }
 
-        private void sendMsgButton_Click(object sender, EventArgs e) {
+        protected virtual void sendMsgButton_Click(object sender, EventArgs e) {
             //log the message, then clear the textbox.
             string msg = msgEntryBox.Text;
-            logAdventure(msg, "DM");
+            logAdventure(msg, "World");
             msgEntryBox.Text = "";
         }
 

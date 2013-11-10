@@ -146,7 +146,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TreeView monsterList;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox msgEntryBox;
+        protected System.Windows.Forms.TextBox msgEntryBox;
         private System.Windows.Forms.Button sendMsgButton;
     }
 }

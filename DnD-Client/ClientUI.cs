@@ -9,14 +9,23 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace DnD_Client
+namespace DnD
 {
-    public partial class ClientUI : Form
+    public partial class ClientUI : MainUI
     {
         public ClientUI()
         {
             InitializeComponent();
-            
+
+            DungeonMap = new DungeonMap(this);
+            DungeonMap.Show(this);
+        }
+
+        protected override void sendMsgButton_Click(object sender, EventArgs e) {     
+            //log the message, then clear the textbox.
+            string msg = msgEntryBox.Text;
+            logAdventure(msg, "Player");
+            msgEntryBox.Text = "";
         }
     }
 }

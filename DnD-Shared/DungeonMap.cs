@@ -10,16 +10,17 @@ using System.Windows.Forms;
 namespace DnD {
     public partial class DungeonMap : Form {
 
-        MainUI ParentUI;
+        protected MainUI ParentUI;
 
         public object[,] Grid;
         public const int GRIDSIZE = 20;
 
         public Pen pen = new Pen(Color.Black);
-
+        protected DungeonMap() {
+            InitializeComponent();
+        }
         public DungeonMap(MainUI parent) {
             InitializeComponent();
-
             this.ParentUI = parent;
             this.Shown += (object sender, EventArgs e) => {
                 this.Left = ParentUI.Left + ParentUI.Width;
@@ -40,12 +41,6 @@ namespace DnD {
             }
             mapPanel.Left = -1000;
             mapPanel.Top = -1000;
-
-            contextMenu.ItemClicked += (object sender, ToolStripItemClickedEventArgs e) => {
-                if (e.ClickedItem == addMonsterButton) {
-                    
-                }
-            };
         }
 
         public void AddMonster(int x, int y, string name, string race, int level) {
@@ -73,8 +68,8 @@ namespace DnD {
             return new Point(p.X / GRIDSIZE, p.Y / GRIDSIZE);
         }
 
-        private void mapPanel_MouseClick(object sender, MouseEventArgs e) {
-            contextMenu.Show(Point.Add(Point.Subtract(e.Location, new Size(this.HorizontalScroll.Value, this.VerticalScroll.Value)), new Size(this.Left - this.ClientSize.Width / 2, this.Top - this.ClientSize.Height / 2)));
+        protected virtual void mapPanel_MouseClick(object sender, MouseEventArgs e) {
+
         }
     }
 }
