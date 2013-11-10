@@ -18,15 +18,18 @@ namespace DnD {
             contextMenu.ItemClicked += (object sender, ToolStripItemClickedEventArgs e) => {
                 if (e.ClickedItem == addMonsterButton) {
                     AddMonsterDialogue amd = new AddMonsterDialogue();
-                    amd.Location = PointToGrid(lastClick);
+                    amd.SpawnPoint = PointToGrid(lastClick);
                     amd.Show();
-                    this.AddMonster(amd.Result);
+                    amd.FormClosing += (object sender2, FormClosingEventArgs e2) => {
+                        this.AddMonster(amd.Result);
+                        e2.Cancel = false;
+                    };
                 }
             };
         }
 
         protected override void mapPanel_MouseClick(object sender, MouseEventArgs e) {
-            contextMenu.Show(PointToClient(e.Location));
+            contextMenu.Show(mapPanel.PointToScreen(e.Location));
             lastClick = PointToClient(e.Location);
         }
 

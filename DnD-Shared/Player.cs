@@ -10,31 +10,31 @@ namespace DnD {
         public string Race { get; private set; }
         public string Class { get; private set; }
 
-        public int Level { get; private set; }
-        public int Exp { get; private set; }
-        public int HP { get; private set; }
-        public int AP { get; private set; }
+        public short Level { get; private set; }
+        public short Exp { get; private set; }
+        public short HP { get; private set; }
+        public short AP { get; private set; }
 
-        public int Str { get; private set; }
-        public int Con { get; private set; }
-        public int Dex { get; private set; }
-        public int Int { get; private set; }
-        public int Wis { get; private set; }
-        public int Cha { get; private set; }
+        public short Str { get; private set; }
+        public short Con { get; private set; }
+        public short Dex { get; private set; }
+        public short Int { get; private set; }
+        public short Wis { get; private set; }
+        public short Cha { get; private set; }
 
-        public int Ac { get; private set; }
-        public int Fort { get; private set; }
-        public int Ref { get; private set; }
-        public int Will { get; private set; }
+        public short Ac { get; private set; }
+        public short Fort { get; private set; }
+        public short Ref { get; private set; }
+        public short Will { get; private set; }
 
-        public int Spd { get; private set; }
+        public short Spd { get; private set; }
 
-        public int D4;
-        public int D6;
-        public int D8a;
-        public int D8b;
-        public int D12;
-        public int D20;
+        public short D4;
+        public short D6;
+        public short D8a;
+        public short D8b;
+        public short D12;
+        public short D20;
 
         public Color Color;
 
@@ -44,6 +44,10 @@ namespace DnD {
             this.Name = name;
             this.Race = race;
             this.Class = plyrclass;
+
+            Random rand = new Random();
+            int g = rand.Next(0, 255);
+            this.Color = Color.FromArgb(rand.Next(0, 96), g, 255 - g);
         }
 
         public PlayerStatsPane GetPane(MainUI parent) {

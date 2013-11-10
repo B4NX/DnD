@@ -11,14 +11,14 @@ namespace DnD {
     public partial class AddMonsterDialogue : Form {
 
         public Monster Result;
-        public Point Location;
+        public Point SpawnPoint;
 
         public AddMonsterDialogue() {
             InitializeComponent();
         }
 
         public Monster GetMonster() {
-            Monster m = new Monster(Location, name.Text, race.Text, Int16.Parse(level.Text), Int16.Parse(hp.Text));
+            Monster m = new Monster(SpawnPoint, name.Text, race.Text, Int16.Parse(level.Text), Int16.Parse(hp.Text));
             m.Str = Int16.Parse(str.Text);
             m.Dex = Int16.Parse(dex.Text);
             m.Wis = Int16.Parse(wis.Text);
@@ -36,12 +36,24 @@ namespace DnD {
         private void number_Validating(object sender, CancelEventArgs e) {
             short num;
             if (!Int16.TryParse(((MaskedTextBox)sender).Text, out num)) {
-                e.Cancel = true;
+                okayBtn.Enabled = false;
             }
+            else if (name.Text != "" && race.Text != "") { okayBtn.Enabled = true; }
+            else { okayBtn.Enabled = false; }
         }
 
         private void okayBtn_Click(object sender, EventArgs e) {
             this.Result = GetMonster();
+            this.Close();
+        }
+
+        private void cancelBtn_Click(object sender, EventArgs e) {
+            this.Close();
+        }
+
+        private void level_Enter(object sender, EventArgs e) {
+            CancelEventArgs a = new CancelEventArgs();
+            number_Validating(sender, a);
         }
     }
 }

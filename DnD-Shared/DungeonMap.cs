@@ -65,11 +65,18 @@ namespace DnD {
         }
 
         private void DrawObjects(object sender, PaintEventArgs e) {
-            for (int x = 0; x < this.Grid.GetLength(0); ++x) {
-                for (int y = 0; y < this.Grid.GetLength(1); ++y) {
+            for (int x = (e.ClipRectangle.Left / GRIDSIZE); x < (e.ClipRectangle.Right / GRIDSIZE); ++x) {
+                for (int y = (e.ClipRectangle.Top / GRIDSIZE); y < (e.ClipRectangle.Bottom / GRIDSIZE); ++y) {
                     if (Grid[x, y] != null) {
                         if (Grid[x, y] is Player) {
-                            //(Player)Grid[x, y]
+                            Player plr = (Player)Grid[x,y];
+                            Brush b = new SolidBrush(plr.Color);
+                            e.Graphics.FillEllipse(b, x * GRIDSIZE, y * GRIDSIZE, GRIDSIZE, GRIDSIZE);
+                        }
+                        else if (Grid[x, y] is Monster) {
+                            Monster mtr = (Monster)Grid[x, y];
+                            Brush b = new SolidBrush(mtr.Color);
+                            e.Graphics.FillEllipse(b, x * GRIDSIZE, y * GRIDSIZE, GRIDSIZE, GRIDSIZE);
                         }
                     }
                 }

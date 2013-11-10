@@ -75,7 +75,7 @@
             this.label1.Location = new System.Drawing.Point(12, 41);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(38, 13);
-            this.label1.TabIndex = 1;
+            this.label1.TabIndex = 8;
             this.label1.Text = "Name:";
             // 
             // label2
@@ -93,7 +93,7 @@
             this.race.Location = new System.Drawing.Point(54, 63);
             this.race.Name = "race";
             this.race.Size = new System.Drawing.Size(248, 20);
-            this.race.TabIndex = 0;
+            this.race.TabIndex = 1;
             // 
             // label3
             // 
@@ -101,7 +101,7 @@
             this.label3.Location = new System.Drawing.Point(12, 66);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(36, 13);
-            this.label3.TabIndex = 1;
+            this.label3.TabIndex = 4;
             this.label3.Text = "Race:";
             // 
             // label4
@@ -110,7 +110,7 @@
             this.label4.Location = new System.Drawing.Point(12, 91);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(36, 13);
-            this.label4.TabIndex = 1;
+            this.label4.TabIndex = 3;
             this.label4.Text = "Level:";
             // 
             // label5
@@ -145,7 +145,9 @@
             this.level.Location = new System.Drawing.Point(54, 88);
             this.level.Name = "level";
             this.level.Size = new System.Drawing.Size(108, 20);
-            this.level.TabIndex = 3;
+            this.level.TabIndex = 2;
+            this.level.Text = "1";
+            this.level.Enter += new System.EventHandler(this.level_Enter);
             this.level.Validating += new System.ComponentModel.CancelEventHandler(this.number_Validating);
             // 
             // hp
@@ -154,6 +156,8 @@
             this.hp.Name = "hp";
             this.hp.Size = new System.Drawing.Size(103, 20);
             this.hp.TabIndex = 3;
+            this.hp.Text = "1";
+            this.hp.Enter += new System.EventHandler(this.level_Enter);
             this.hp.Validating += new System.ComponentModel.CancelEventHandler(this.number_Validating);
             // 
             // str
@@ -161,7 +165,9 @@
             this.str.Location = new System.Drawing.Point(38, 16);
             this.str.Name = "str";
             this.str.Size = new System.Drawing.Size(49, 20);
-            this.str.TabIndex = 3;
+            this.str.TabIndex = 0;
+            this.str.Text = "0";
+            this.str.Enter += new System.EventHandler(this.level_Enter);
             this.str.Validating += new System.ComponentModel.CancelEventHandler(this.number_Validating);
             // 
             // con
@@ -170,6 +176,8 @@
             this.con.Name = "con";
             this.con.Size = new System.Drawing.Size(53, 20);
             this.con.TabIndex = 3;
+            this.con.Text = "0";
+            this.con.Enter += new System.EventHandler(this.level_Enter);
             this.con.Validating += new System.ComponentModel.CancelEventHandler(this.number_Validating);
             // 
             // label8
@@ -195,7 +203,9 @@
             this.dex.Location = new System.Drawing.Point(38, 42);
             this.dex.Name = "dex";
             this.dex.Size = new System.Drawing.Size(49, 20);
-            this.dex.TabIndex = 3;
+            this.dex.TabIndex = 1;
+            this.dex.Text = "0";
+            this.dex.Enter += new System.EventHandler(this.level_Enter);
             this.dex.Validating += new System.ComponentModel.CancelEventHandler(this.number_Validating);
             // 
             // Int
@@ -203,7 +213,9 @@
             this.Int.Location = new System.Drawing.Point(122, 42);
             this.Int.Name = "Int";
             this.Int.Size = new System.Drawing.Size(53, 20);
-            this.Int.TabIndex = 3;
+            this.Int.TabIndex = 4;
+            this.Int.Text = "0";
+            this.Int.Enter += new System.EventHandler(this.level_Enter);
             this.Int.Validating += new System.ComponentModel.CancelEventHandler(this.number_Validating);
             // 
             // label10
@@ -229,7 +241,9 @@
             this.wis.Location = new System.Drawing.Point(38, 68);
             this.wis.Name = "wis";
             this.wis.Size = new System.Drawing.Size(49, 20);
-            this.wis.TabIndex = 3;
+            this.wis.TabIndex = 2;
+            this.wis.Text = "0";
+            this.wis.Enter += new System.EventHandler(this.level_Enter);
             this.wis.Validating += new System.ComponentModel.CancelEventHandler(this.number_Validating);
             // 
             // cha
@@ -237,7 +251,9 @@
             this.cha.Location = new System.Drawing.Point(122, 68);
             this.cha.Name = "cha";
             this.cha.Size = new System.Drawing.Size(53, 20);
-            this.cha.TabIndex = 3;
+            this.cha.TabIndex = 5;
+            this.cha.Text = "0";
+            this.cha.Enter += new System.EventHandler(this.level_Enter);
             this.cha.Validating += new System.ComponentModel.CancelEventHandler(this.number_Validating);
             // 
             // label12
@@ -272,7 +288,9 @@
             this.ac.Location = new System.Drawing.Point(40, 15);
             this.ac.Name = "ac";
             this.ac.Size = new System.Drawing.Size(53, 20);
-            this.ac.TabIndex = 3;
+            this.ac.TabIndex = 0;
+            this.ac.Text = "0";
+            this.ac.Enter += new System.EventHandler(this.level_Enter);
             this.ac.Validating += new System.ComponentModel.CancelEventHandler(this.number_Validating);
             // 
             // fort
@@ -280,7 +298,9 @@
             this.fort.Location = new System.Drawing.Point(40, 41);
             this.fort.Name = "fort";
             this.fort.Size = new System.Drawing.Size(53, 20);
-            this.fort.TabIndex = 3;
+            this.fort.TabIndex = 1;
+            this.fort.Text = "0";
+            this.fort.Enter += new System.EventHandler(this.level_Enter);
             this.fort.Validating += new System.ComponentModel.CancelEventHandler(this.number_Validating);
             // 
             // Ref
@@ -288,7 +308,9 @@
             this.Ref.Location = new System.Drawing.Point(40, 67);
             this.Ref.Name = "Ref";
             this.Ref.Size = new System.Drawing.Size(53, 20);
-            this.Ref.TabIndex = 3;
+            this.Ref.TabIndex = 2;
+            this.Ref.Text = "0";
+            this.Ref.Enter += new System.EventHandler(this.level_Enter);
             this.Ref.Validating += new System.ComponentModel.CancelEventHandler(this.number_Validating);
             // 
             // label15
@@ -306,6 +328,8 @@
             this.will.Name = "will";
             this.will.Size = new System.Drawing.Size(53, 20);
             this.will.TabIndex = 3;
+            this.will.Text = "0";
+            this.will.Enter += new System.EventHandler(this.level_Enter);
             this.will.Validating += new System.ComponentModel.CancelEventHandler(this.number_Validating);
             // 
             // groupBox1
@@ -360,7 +384,9 @@
             this.spd.Location = new System.Drawing.Point(60, 230);
             this.spd.Name = "spd";
             this.spd.Size = new System.Drawing.Size(59, 20);
-            this.spd.TabIndex = 3;
+            this.spd.TabIndex = 5;
+            this.spd.Text = "0";
+            this.spd.Enter += new System.EventHandler(this.level_Enter);
             this.spd.Validating += new System.ComponentModel.CancelEventHandler(this.number_Validating);
             // 
             // okayBtn
@@ -382,6 +408,7 @@
             this.cancelBtn.TabIndex = 7;
             this.cancelBtn.Text = "Cancel";
             this.cancelBtn.UseVisualStyleBackColor = true;
+            this.cancelBtn.Click += new System.EventHandler(this.cancelBtn_Click);
             // 
             // AddMonsterDialogue
             // 

@@ -35,6 +35,8 @@ namespace DnD {
         public short x;
         public short y;
 
+        public Color Color;
+
         private MonsterStatsPane pane;
 
         public Monster(int x, int y, string name, string race, short level, short hp) {
@@ -44,6 +46,10 @@ namespace DnD {
             this.Race = race;
             this.Level = level;
             this.HP = hp;
+
+            Random rand = new Random();
+
+            this.Color = Color.FromArgb(rand.Next(32, 255), rand.Next(0, 32), rand.Next(0, 32));
         }
         public Monster(Point p, string name, string race, short level, short hp) : this(p.X, p.Y, name, race, level, hp) {
 
