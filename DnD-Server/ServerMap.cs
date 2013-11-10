@@ -38,6 +38,7 @@ namespace DnD {
         //Precondition: x and y are within Grid bounds
         public void AddMonster(Monster m) {
             this.Grid[m.x, m.y] = m;
+            this.ParentUI.AddMonster(m);
             this.Refresh();
         }
         public void ResetMap() {
