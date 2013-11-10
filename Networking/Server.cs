@@ -22,8 +22,6 @@ namespace Networking {
             sock.Bind(ep);
         }
 
-        public static event EventHandler ClientConnected;
-
         public static Socket connect() {
             sock.Listen(Int32.MaxValue);
             Debug.WriteLine("Waiting for connection");
@@ -95,8 +93,10 @@ namespace Networking {
                 }
             }
         }
+        public static Queue<Message> readQueue = new Queue<Message>();
         public static void parseMessage(byte[] b) {
             Console.WriteLine(new Message(Message.Head.LOG, b).ToString());
+            readQueue.Enqueue(new Message((Message.Head)b[0], b));
         }
 
         private static void WriteByteArray(ref byte[] b) {
