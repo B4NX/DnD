@@ -35,8 +35,8 @@ namespace DnD
         }
 
         private void Application_Idle(object sender, EventArgs e) {
-            if (readQueue.Count > 0) {
-                string msg = readQueue.Dequeue();
+            if (readUIQueue.Count > 0) {
+                string msg = readUIQueue.Dequeue();
                 adventureLog += msg;
                 adventureLogBox.Text += msg;
             }
@@ -54,10 +54,12 @@ namespace DnD
                 logClientAdventure();
             }
         }
-        private static Queue<string> readQueue = new Queue<string>();
+        private static Queue<string> readUIQueue = new Queue<string>();
         private void logClientAdventure() {
             if (Client.readQueue.Count != 0) {
-                readQueue.Enqueue(Client.readQueue.Dequeue().ToString());
+                Networking.Message m=Client.readQueue.Dequeue();
+                Debug.WriteLine(m.ToString());
+                readUIQueue.Enqueue(m.ToString());
             }
         }
     }

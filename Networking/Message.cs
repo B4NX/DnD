@@ -62,8 +62,8 @@ namespace Networking {
         public override string ToString() {
             string s="";
             for (int i = 1; i <= this.mssg.Length - 1; i++) {
-                if (i != 0) {
-                    s += this.mssg[i];
+                if (this.mssg[i] != 0) {
+                    s += (char)this.mssg[i];
                     continue;
                 }
             }

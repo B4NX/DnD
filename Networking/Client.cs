@@ -48,7 +48,6 @@ namespace Networking {
         public static void Update() {
             while (true) {
                 //Send
-                Debug.WriteLine(writeQueue.Count);
                 if (writeQueue.Count != 0) {
                     System.Diagnostics.Debug.WriteLine("x");
                     sock.Send(writeQueue.Dequeue());
@@ -58,7 +57,9 @@ namespace Networking {
                 //Receive
                 sock.Receive(readBuffer);
                 Message m = readBuffer;
-                readQueue.Enqueue(m);
+                if (m.Header != Message.HeaderVal.EMPTY) {
+                    readQueue.Enqueue(m);
+                }
             }
         }
     }
