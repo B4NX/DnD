@@ -140,11 +140,11 @@
         #endregion
 
         private System.Windows.Forms.Label dndlabel;
-        private System.Windows.Forms.TreeView currentPlayerList;
+        protected System.Windows.Forms.TreeView currentPlayerList;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox adventureLogBox;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TreeView monsterList;
+        protected System.Windows.Forms.TreeView monsterList;
         private System.Windows.Forms.Label label3;
         protected System.Windows.Forms.TextBox msgEntryBox;
         private System.Windows.Forms.Button sendMsgButton;

@@ -37,5 +37,13 @@ namespace DnD {
             //if (
             return msg;
         }
+
+        public void AddMonster(Monster m) {
+            MonsterTreeNode n = new MonsterTreeNode(m);
+            monsterList.Nodes.Add(n);
+            monsterList.NodeMouseDoubleClick += (object sender, TreeNodeMouseClickEventArgs e) => {
+                ((MonsterTreeNode)e.Node).Monster.GetPane(this).Show();
+            };
+        }
     }
 }
