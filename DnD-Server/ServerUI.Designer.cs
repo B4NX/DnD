@@ -151,7 +151,7 @@
     }
     class Donaudampfschiffahrtsgesellschaftskapitän {
         public static void Wat() {
-            Console.WriteLine("Wat");
+            System.Diagnostics.Debug.WriteLine("Wat");
         }
     }
 }
