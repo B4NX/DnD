@@ -58,11 +58,15 @@ namespace Networking {
                     }
                     //Receive
                     sock.Receive(readBuffer);
+                    Message m = new Message((Message.Head)readBuffer[0], readBuffer);
+                    if (m.Header != Message.Head.EMPTY) {
+                        readQueue.Enqueue(m);
+                    }
                 }
-                catch (SocketException e) { Debug.WriteLine(e.Message); sock.Close(); hasSocket = false; }
-                Message m = new Message((Message.Head)readBuffer[0], readBuffer);
-                if (m.Header != Message.Head.EMPTY) {
-                    readQueue.Enqueue(m);
+                catch (SocketException e) { 
+                    Debug.WriteLine(e.Message); 
+                    sock.Close(); 
+                    hasSocket = false; 
                 }
             }
         }
