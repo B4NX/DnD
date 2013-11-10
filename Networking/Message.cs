@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Networking {
     public class Message {
-        public const Message EMPTY=new Message(HeaderVal.EMPTY);
+        public static Message EMPTY=new Message(HeaderVal.EMPTY);
         public enum HeaderVal {
             EMPTY,
             STAT,

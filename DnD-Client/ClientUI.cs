@@ -39,7 +39,6 @@ namespace DnD
             //Now send msg on to the server
             Client.writeQueue.Enqueue(Networking.Message.getLogMessage(msg));
             Debug.WriteLine(Client.writeQueue.Count);
-            Debug.WriteLine(Client.updateThread.ThreadState);
         }
         public void LogUpdate() {
             while (true) {

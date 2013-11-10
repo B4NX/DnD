@@ -89,7 +89,9 @@ namespace Networking {
                 }
             }
         }
-        public static void parseMessage(byte[] b);
+        public static void parseMessage(byte[] b) {
+            Debug.WriteLine("Well fuck you too VS");
+        }
 
         private static void WriteByteArray(ref byte[] b) {
             foreach (byte x in b) {
