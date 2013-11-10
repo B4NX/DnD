@@ -26,10 +26,7 @@ namespace DnD {
         }
 
         public virtual void logAdventure(string msg, string sender) {
-            //append DM prefix and newline, then log it to the main string and textbox.
-            msg = "[" + sender + "]: " + msg + Environment.NewLine;
-            adventureLog +=  msg;
-            adventureLogBox.Text += msg;
+
         }
 
         private void msgEntryBox_KeyPress(object sender, KeyEventArgs e) {

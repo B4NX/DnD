@@ -8,7 +8,7 @@ using System.Diagnostics;
 using System.Threading;
 
 namespace Networking {
-    class Server {
+    public class Server {
         /// <summary>
         /// Represents the network service for the Server
         /// </summary>

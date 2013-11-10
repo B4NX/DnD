@@ -6,6 +6,8 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.Threading;
+using Networking;
 
 namespace DnD {
     public partial class ServerUI : MainUI {
@@ -14,10 +16,25 @@ namespace DnD {
 
             DungeonMap = new ServerMap(this);
             DungeonMap.Show(this);
+
+            Thread update = new Thread(LogUpdate);
+            update.Start();
         }
 
         private void reset_Click(object sender, EventArgs e) {
             ((ServerMap)this.DungeonMap).ResetMap();
+        }
+
+        public override void logAdventure(string msg, string sender) {
+            //append DM prefix and newline, then log it to the main string and textbox.
+            msg = "[" + sender + "]: " + msg + Environment.NewLine;
+            adventureLog += msg;
+            adventureLogBox.Text += msg;
+            Networking.Server.SendToAll(Networking.Message.ToByteArray(msg));
+        }
+
+        public void LogUpdate() {
+            
         }
 
         protected override void sendMsgButton_Click(object sender, EventArgs e) {
