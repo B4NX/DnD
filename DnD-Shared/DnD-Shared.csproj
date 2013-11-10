@@ -42,6 +42,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Floor.cs" />
+    <Compile Include="IDnDTile.cs" />
+    <Compile Include="PlayerTreeNode.cs" />
     <Compile Include="DungeonMap.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -76,6 +79,7 @@
     <Compile Include="MainUI.Designer.cs">
       <DependentUpon>MainUI.cs</DependentUpon>
     </Compile>
+    <Compile Include="Wall.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="DungeonMap.resx">

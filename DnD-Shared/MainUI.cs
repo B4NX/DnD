@@ -49,6 +49,14 @@ namespace DnD {
             };
         }
 
+        public void AddPlayer(Player p) {
+            PlayerTreeNode q = new PlayerTreeNode(p);
+            playerList.Nodes.Add(q);
+            playerList.NodeMouseDoubleClick += (object sender, TreeNodeMouseClickEventArgs e) => {
+                ((PlayerTreeNode)e.Node).Player.GetPane(this).Show();
+            };
+        }
+
         protected override void OnClosing(CancelEventArgs e) {
             base.OnClosing(e);
         }

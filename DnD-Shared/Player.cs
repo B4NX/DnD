@@ -5,7 +5,7 @@ using System.Text;
 using System.Drawing;
 
 namespace DnD {
-    public class Player {
+    public class Player : IDnDTile {
         public string Name { get; private set; }
         public string Race { get; private set; }
         public string Class { get; private set; }
@@ -39,6 +39,8 @@ namespace DnD {
         public Color Color;
 
         private PlayerStatsPane pane;
+        public short x;
+        public short y;
 
         public Player(string name, string race, string plyrclass) {
             this.Name = name;

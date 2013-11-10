@@ -41,8 +41,13 @@ namespace DnD {
             this.ParentUI.AddMonster(m);
             this.Refresh();
         }
+        public void AddPlayer(Player p) {
+            this.Grid[p.x, p.y] = p;
+            this.Refresh();
+        }
+
         public void ResetMap() {
-            this.Grid = new object[100, 100];
+            this.Grid = new IDnDTile[100, 100];
         }
     }
 }

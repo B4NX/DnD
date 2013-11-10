@@ -5,7 +5,7 @@ using System.Text;
 using System.Drawing;
 
 namespace DnD {
-    public class Monster {
+    public class Monster : IDnDTile {
         public string Name;
         public string Race;
         public short Level;

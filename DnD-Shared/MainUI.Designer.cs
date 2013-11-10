@@ -24,7 +24,7 @@
         /// </summary>
         private void InitializeComponent() {
             this.dndlabel = new System.Windows.Forms.Label();
-            this.currentPlayerList = new System.Windows.Forms.TreeView();
+            this.playerList = new System.Windows.Forms.TreeView();
             this.label1 = new System.Windows.Forms.Label();
             this.adventureLogBox = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -44,12 +44,12 @@
             this.dndlabel.TabIndex = 0;
             this.dndlabel.Text = "D&&D";
             // 
-            // currentPlayerList
+            // playerList
             // 
-            this.currentPlayerList.Location = new System.Drawing.Point(12, 72);
-            this.currentPlayerList.Name = "currentPlayerList";
-            this.currentPlayerList.Size = new System.Drawing.Size(121, 153);
-            this.currentPlayerList.TabIndex = 1;
+            this.playerList.Location = new System.Drawing.Point(12, 72);
+            this.playerList.Name = "playerList";
+            this.playerList.Size = new System.Drawing.Size(121, 153);
+            this.playerList.TabIndex = 1;
             // 
             // label1
             // 
@@ -128,7 +128,7 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.monsterList);
-            this.Controls.Add(this.currentPlayerList);
+            this.Controls.Add(this.playerList);
             this.Controls.Add(this.dndlabel);
             this.Name = "MainUI";
             this.Text = "DnD";
@@ -140,7 +140,7 @@
         #endregion
 
         private System.Windows.Forms.Label dndlabel;
-        protected System.Windows.Forms.TreeView currentPlayerList;
+        protected System.Windows.Forms.TreeView playerList;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox adventureLogBox;
         private System.Windows.Forms.Label label2;

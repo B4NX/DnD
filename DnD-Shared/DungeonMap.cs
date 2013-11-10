@@ -12,7 +12,7 @@ namespace DnD {
 
         protected MainUI ParentUI;
 
-        public object[,] Grid;
+        public IDnDTile[,] Grid;
         public const int GRIDSIZE = 20;
 
         public Pen pen = new Pen(Color.Black);
@@ -27,7 +27,7 @@ namespace DnD {
                 this.Top = ParentUI.Top + (ParentUI.Height - this.Height) / 2;
             };
 
-            this.Grid = new object[100, 100];
+            this.Grid = new IDnDTile[100, 100];
 
             mapPanel.Width = GRIDSIZE * 100;
             mapPanel.Height = GRIDSIZE * 100;
@@ -44,10 +44,10 @@ namespace DnD {
             mapPanel.Top = -1000;
         }
 
-        public void Update(object[,] grid) {
+        public void Update(IDnDTile[,] grid) {
             this.Grid = grid;
         }
-        public void Update(int x, int y, object obj) {
+        public void Update(int x, int y, IDnDTile obj) {
             this.Grid[x, y] = obj;
         }
 
