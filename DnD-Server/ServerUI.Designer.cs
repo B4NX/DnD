@@ -149,5 +149,9 @@
         private System.Windows.Forms.TextBox msgEntryBox;
         private System.Windows.Forms.Button sendMsgButton;
     }
+    class Donaudampfschiffahrtsgesellschaftskapitän {
+        public static void Wat() {
+            Console.WriteLine("Wat");
+        }
+    }
 }
-
