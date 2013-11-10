@@ -43,7 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Floor.cs" />
-    <Compile Include="IDnDTile.cs" />
+    <Compile Include="DnDTile.cs" />
     <Compile Include="PlayerTreeNode.cs" />
     <Compile Include="DungeonMap.cs">
       <SubType>Form</SubType>

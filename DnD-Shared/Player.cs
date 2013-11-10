@@ -5,29 +5,29 @@ using System.Text;
 using System.Drawing;
 
 namespace DnD {
-    public class Player : IDnDTile {
-        public string Name { get; private set; }
-        public string Race { get; private set; }
-        public string Class { get; private set; }
+    public class Player : DnDTile {
+        public string Name;
+        public string Race;
+        public string Class;
 
-        public short Level { get; private set; }
-        public short Exp { get; private set; }
-        public short HP { get; private set; }
-        public short AP { get; private set; }
+        public short Level;
+        public short Exp;
+        public short HP;
+        public short AP;
 
-        public short Str { get; private set; }
-        public short Con { get; private set; }
-        public short Dex { get; private set; }
-        public short Int { get; private set; }
-        public short Wis { get; private set; }
-        public short Cha { get; private set; }
+        public short Str;
+        public short Con;
+        public short Dex;
+        public short Int;
+        public short Wis;
+        public short Cha;
 
-        public short Ac { get; private set; }
-        public short Fort { get; private set; }
-        public short Ref { get; private set; }
-        public short Will { get; private set; }
+        public short Ac;
+        public short Fort;
+        public short Ref;
+        public short Will;
 
-        public short Spd { get; private set; }
+        public short Spd;
 
         public short D4;
         public short D6;
@@ -37,10 +37,9 @@ namespace DnD {
         public short D20;
 
         public Color Color;
+        public Image Image;
 
         private PlayerStatsPane pane;
-        public short x;
-        public short y;
 
         public Player(string name, string race, string plyrclass) {
             this.Name = name;
@@ -62,6 +61,14 @@ namespace DnD {
 
         public void Dispose() {
             if (pane != null) { pane.Dispose(); }
+        }
+        public override void Draw(Graphics g) {
+            if (this.Image == null) {
+                g.FillEllipse(new SolidBrush(Color), DungeonMap.GRIDSIZE * x, DungeonMap.GRIDSIZE * y, DungeonMap.GRIDSIZE, DungeonMap.GRIDSIZE);
+            }
+            else {
+                g.DrawImage(this.Image, this.x * DungeonMap.GRIDSIZE, this.y * DungeonMap.GRIDSIZE, DungeonMap.GRIDSIZE, DungeonMap.GRIDSIZE);
+            }
         }
     }
 }

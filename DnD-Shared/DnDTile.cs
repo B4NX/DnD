@@ -5,10 +5,10 @@ using System.Text;
 using System.Drawing;
 
 namespace DnD {
-    public abstract class IDnDTile {
+    public abstract class DnDTile {
         public short x;
         public short y;
 
-        //public void Draw(Graphics g);
+        public abstract void Draw(Graphics g);
     }
 }

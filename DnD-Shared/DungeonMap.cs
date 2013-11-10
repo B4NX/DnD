@@ -12,7 +12,7 @@ namespace DnD {
 
         protected MainUI ParentUI;
 
-        public IDnDTile[,] Grid;
+        public DnDTile[,] Grid;
         public const int GRIDSIZE = 20;
 
         public Pen pen = new Pen(Color.Black);
@@ -27,7 +27,7 @@ namespace DnD {
                 this.Top = ParentUI.Top + (ParentUI.Height - this.Height) / 2;
             };
 
-            this.Grid = new IDnDTile[100, 100];
+            this.Grid = new DnDTile[100, 100];
 
             mapPanel.Width = GRIDSIZE * 100;
             mapPanel.Height = GRIDSIZE * 100;
@@ -37,17 +37,17 @@ namespace DnD {
             this.ClientSize = new Size(361, 361);
 
             //Scroll to the middle of the map
-            using (Control c = new Control() { Parent = this, Height = 1, Top = this.ClientSize.Height / 2 + (GRIDSIZE * 50), Width = 1, Left = this.ClientSize.Width / 2 + (GRIDSIZE * 50) }) {
-                this.ScrollControlIntoView(c);
+            using (Control c = new Control() { Parent = container, Height = 1, Top = container.ClientSize.Height / 2 + (GRIDSIZE * 50), Width = 1, Left = container.ClientSize.Width / 2 + (GRIDSIZE * 50) }) {
+                container.ScrollControlIntoView(c);
             }
-            mapPanel.Left = -1000;
-            mapPanel.Top = -1000;
+            mapPanel.Left = -(GRIDSIZE * 50);
+            mapPanel.Top = -(GRIDSIZE * 50);
         }
 
-        public void Update(IDnDTile[,] grid) {
+        public void Update(DnDTile[,] grid) {
             this.Grid = grid;
         }
-        public void Update(int x, int y, IDnDTile obj) {
+        public void Update(int x, int y, DnDTile obj) {
             this.Grid[x, y] = obj;
         }
 
@@ -68,16 +68,7 @@ namespace DnD {
             for (int x = (e.ClipRectangle.Left / GRIDSIZE); x < (e.ClipRectangle.Right / GRIDSIZE); ++x) {
                 for (int y = (e.ClipRectangle.Top / GRIDSIZE); y < (e.ClipRectangle.Bottom / GRIDSIZE); ++y) {
                     if (Grid[x, y] != null) {
-                        if (Grid[x, y] is Player) {
-                            Player plr = (Player)Grid[x,y];
-                            Brush b = new SolidBrush(plr.Color);
-                            e.Graphics.FillEllipse(b, x * GRIDSIZE, y * GRIDSIZE, GRIDSIZE, GRIDSIZE);
-                        }
-                        else if (Grid[x, y] is Monster) {                            
-                            Monster mtr = (Monster)Grid[x, y];
-                            Brush b = new SolidBrush(mtr.Color);
-                            e.Graphics.FillEllipse(b, x * GRIDSIZE, y * GRIDSIZE, GRIDSIZE, GRIDSIZE);
-                        }
+                        Grid[x, y].Draw(e.Graphics);
                     }
                 }
             }

@@ -5,7 +5,7 @@ using System.Text;
 using System.Drawing;
 
 namespace DnD {
-    public class Monster : IDnDTile {
+    public class Monster : DnDTile {
         public string Name;
         public string Race;
         public short Level;
@@ -32,10 +32,8 @@ namespace DnD {
         public byte D12;
         public byte D20;
 
-        public short x;
-        public short y;
-
         public Color Color;
+        public Image Image;
 
         private MonsterStatsPane pane;
 
@@ -61,6 +59,15 @@ namespace DnD {
                 pane = new MonsterStatsPane(parent, this); 
             }
             return pane;
+        }
+
+        public override void Draw(Graphics g) {
+            if (this.Image == null) {
+                g.FillEllipse(new SolidBrush(Color), DungeonMap.GRIDSIZE * x, DungeonMap.GRIDSIZE * y, DungeonMap.GRIDSIZE, DungeonMap.GRIDSIZE);
+            }
+            else {
+                g.DrawImage(this.Image, this.x * DungeonMap.GRIDSIZE, this.y * DungeonMap.GRIDSIZE, DungeonMap.GRIDSIZE, DungeonMap.GRIDSIZE);
+            }
         }
 
         public void Dispose() {
