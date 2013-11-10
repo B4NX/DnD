@@ -27,5 +27,12 @@ namespace DnD
             logAdventure(msg, "Player");
             msgEntryBox.Text = "";
         }
+
+        public override void logAdventure(string msg, string sender) {
+            //append DM prefix and newline, then log it to the main string and textbox.
+            msg = "[" + sender + "]: " + msg + "\n";
+            //Now send msg on to the server
+            //HERE
+        }
     }
 }
