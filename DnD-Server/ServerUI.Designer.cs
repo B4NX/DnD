@@ -28,7 +28,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.adventureLogBox = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.treeView1 = new System.Windows.Forms.TreeView();
+            this.monsterList = new System.Windows.Forms.TreeView();
             this.label3 = new System.Windows.Forms.Label();
             this.msgEntryBox = new System.Windows.Forms.TextBox();
             this.sendMsgButton = new System.Windows.Forms.Button();
@@ -80,12 +80,12 @@
             this.label2.TabIndex = 4;
             this.label2.Text = "Adventure Log";
             // 
-            // treeView1
+            // monsterList
             // 
-            this.treeView1.Location = new System.Drawing.Point(12, 244);
-            this.treeView1.Name = "treeView1";
-            this.treeView1.Size = new System.Drawing.Size(121, 152);
-            this.treeView1.TabIndex = 1;
+            this.monsterList.Location = new System.Drawing.Point(12, 244);
+            this.monsterList.Name = "monsterList";
+            this.monsterList.Size = new System.Drawing.Size(121, 152);
+            this.monsterList.TabIndex = 1;
             // 
             // label3
             // 
@@ -127,7 +127,7 @@
             this.Controls.Add(this.adventureLogBox);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.treeView1);
+            this.Controls.Add(this.monsterList);
             this.Controls.Add(this.currentPlayerList);
             this.Controls.Add(this.dndlabel);
             this.Name = "ServerUI";
@@ -144,7 +144,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox adventureLogBox;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TreeView treeView1;
+        private System.Windows.Forms.TreeView monsterList;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox msgEntryBox;
         private System.Windows.Forms.Button sendMsgButton;

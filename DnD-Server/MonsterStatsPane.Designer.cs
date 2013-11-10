@@ -24,7 +24,7 @@
         /// </summary>
         private void InitializeComponent() {
             this.label1 = new System.Windows.Forms.Label();
-            this.playerNameLabel = new System.Windows.Forms.Label();
+            this.monsterNameLabel = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.hp = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -44,7 +44,7 @@
             this.label8 = new System.Windows.Forms.Label();
             this.stats = new System.Windows.Forms.GroupBox();
             this.label19 = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
+            this.spd = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.will = new System.Windows.Forms.Label();
             this.reflex = new System.Windows.Forms.Label();
@@ -85,15 +85,15 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Monster - ";
             // 
-            // playerNameLabel
+            // monsterNameLabel
             // 
-            this.playerNameLabel.AutoSize = true;
-            this.playerNameLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.playerNameLabel.Location = new System.Drawing.Point(106, 9);
-            this.playerNameLabel.Name = "playerNameLabel";
-            this.playerNameLabel.Size = new System.Drawing.Size(150, 26);
-            this.playerNameLabel.TabIndex = 0;
-            this.playerNameLabel.Text = "<No Monster>";
+            this.monsterNameLabel.AutoSize = true;
+            this.monsterNameLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.monsterNameLabel.Location = new System.Drawing.Point(106, 9);
+            this.monsterNameLabel.Name = "monsterNameLabel";
+            this.monsterNameLabel.Size = new System.Drawing.Size(150, 26);
+            this.monsterNameLabel.TabIndex = 0;
+            this.monsterNameLabel.Text = "<No Monster>";
             // 
             // label2
             // 
@@ -271,7 +271,7 @@
             // stats
             // 
             this.stats.Controls.Add(this.label19);
-            this.stats.Controls.Add(this.label13);
+            this.stats.Controls.Add(this.spd);
             this.stats.Controls.Add(this.groupBox2);
             this.stats.Controls.Add(this.groupBox1);
             this.stats.Controls.Add(this.label2);
@@ -294,14 +294,14 @@
             this.label19.TabIndex = 6;
             this.label19.Text = "0";
             // 
-            // label13
+            // spd
             // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(118, 111);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(29, 13);
-            this.label13.TabIndex = 6;
-            this.label13.Text = "Spd:";
+            this.spd.AutoSize = true;
+            this.spd.Location = new System.Drawing.Point(118, 111);
+            this.spd.Name = "spd";
+            this.spd.Size = new System.Drawing.Size(29, 13);
+            this.spd.TabIndex = 6;
+            this.spd.Text = "Spd:";
             // 
             // groupBox2
             // 
@@ -483,7 +483,7 @@
             this.Controls.Add(this.monsterinput);
             this.Controls.Add(this.dicebox);
             this.Controls.Add(this.stats);
-            this.Controls.Add(this.playerNameLabel);
+            this.Controls.Add(this.monsterNameLabel);
             this.Controls.Add(this.label1);
             this.Name = "MonsterStatsPane";
             this.Text = "DnD - Monster Stats";
@@ -508,7 +508,7 @@
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label playerNameLabel;
+        private System.Windows.Forms.Label monsterNameLabel;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label hp;
         private System.Windows.Forms.Label label4;
@@ -536,7 +536,7 @@
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label spd;
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.GroupBox dicebox;
         private System.Windows.Forms.PictureBox d4;

@@ -11,22 +11,32 @@ using System.Windows.Forms;
 namespace DnD {
     public partial class ServerUI : Form {
 
-        private static string adventureLog;
+        private string adventureLog;
 
         public ServerUI() {
             InitializeComponent();
+
+            Monster dragon = new Monster("Agararhag", "Dragon", 7, 15);
+            
+            MonsterTreeNode testnode = new MonsterTreeNode(dragon);
+            monsterList.NodeMouseDoubleClick += (object sender, TreeNodeMouseClickEventArgs e) => {
+                MonsterStatsPane pane = ((MonsterTreeNode)e.Node).Monster.GetPane(this);
+                pane.Show();
+            };
+
+            this.monsterList.Nodes.Add(testnode);
         }
 
         private void sendMsgButton_Click(object sender, EventArgs e) {
             //log the message, then clear the textbox.
             string msg = msgEntryBox.Text;
-            logAdventure(msg);
+            logAdventure(msg, "DM");
             msgEntryBox.Text = "";
         }
 
-        private void logAdventure(string msg) {
+        public void logAdventure(string msg, string sender) {
             //append DM prefix and newline, then log it to the main string and textbox.
-            msg = "[DM]: " + msg + "\n";
+            msg = "[" + sender + "]: " + msg + "\n";
             adventureLog += msg;
             adventureLogBox.Text += msg;
         }
@@ -52,6 +62,13 @@ namespace DnD {
 
         private void msgEntryBox_TextChanged(object sender, EventArgs e) {
             if (msgEntryBox.Text == "\n") { msgEntryBox.Text = "";  }
+        }
+
+        protected override void OnClosing(CancelEventArgs e) {
+            foreach (MonsterTreeNode m in this.monsterList.Nodes) {
+                m.Monster.Dispose();
+            }
+            base.OnClosing(e);
         }
     }
 }
