@@ -485,7 +485,12 @@
             this.Controls.Add(this.stats);
             this.Controls.Add(this.monsterNameLabel);
             this.Controls.Add(this.label1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "MonsterStatsPane";
+            this.ShowIcon = false;
+            this.ShowInTaskbar = false;
             this.Text = "DnD - Monster Stats";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

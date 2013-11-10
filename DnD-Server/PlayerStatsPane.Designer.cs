@@ -579,7 +579,12 @@
             this.Controls.Add(this.stats);
             this.Controls.Add(this.playerNameLabel);
             this.Controls.Add(this.label1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "PlayerStatsPane";
+            this.ShowIcon = false;
+            this.ShowInTaskbar = false;
             this.Text = "DnD - Player Stats";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

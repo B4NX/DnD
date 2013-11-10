@@ -46,6 +46,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DungeonMap.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DungeonMap.Designer.cs">
+      <DependentUpon>DungeonMap.cs</DependentUpon>
+    </Compile>
     <Compile Include="Monster.cs" />
     <Compile Include="MonsterStatsPane.cs">
       <SubType>Form</SubType>
@@ -74,6 +80,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="DungeonMap.resx">
+      <DependentUpon>DungeonMap.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MonsterStatsPane.resx">
       <DependentUpon>MonsterStatsPane.cs</DependentUpon>
     </EmbeddedResource>
