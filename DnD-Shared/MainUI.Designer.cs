@@ -62,6 +62,7 @@
             // 
             // adventureLogBox
             // 
+            this.adventureLogBox.AcceptsReturn = true;
             this.adventureLogBox.BackColor = System.Drawing.SystemColors.Window;
             this.adventureLogBox.Location = new System.Drawing.Point(143, 73);
             this.adventureLogBox.Multiline = true;
@@ -103,7 +104,6 @@
             this.msgEntryBox.Name = "msgEntryBox";
             this.msgEntryBox.Size = new System.Drawing.Size(289, 61);
             this.msgEntryBox.TabIndex = 3;
-            this.msgEntryBox.TextChanged += new System.EventHandler(this.msgEntryBox_TextChanged);
             this.msgEntryBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.msgEntryBox_KeyPress);
             // 
             // sendMsgButton
