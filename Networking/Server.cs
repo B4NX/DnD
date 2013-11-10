@@ -43,9 +43,15 @@ namespace Networking {
             byte[] fubar = new byte[256];
             while (true) {
                 s.Receive(fubar);
+                SendToAll(fubar);
                 WriteByteArray(ref fubar);
-
+                Console.Write("Type something: ");
                 s.Send(ToByteArray(Console.ReadLine()));
+            }
+        }
+        public static void SendToAll(byte[] b) {
+            foreach (KeyValuePair<string, Socket> kvp in clients) {
+                kvp.Value.Send(b);
             }
         }
         public static void Talk(Socket client) {

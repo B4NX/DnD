@@ -15,7 +15,11 @@ namespace Networking {
         /// </summary>
         private static Socket sock;
         private static byte[] buffer=new byte[256];
-        private static Thread read;
+        private static Thread update;
+
+        public static Queue<Message> writeQueue = new Queue<Message>();
+        public static Queue<Message> readQueue = new Queue<Message>();
+        
         public static void init() {
             sock = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
         }
@@ -36,55 +40,19 @@ namespace Networking {
                 }
             }
             Debug.WriteLine("Connected!");
-            read=new Thread(AsynchRead);
-            read.Start();
+            update=new Thread(Update);
+            update.Start();
         }
-        public static void WriteMessage(Message m) {
-            sock.Send(m);
-        }
-        //public static void talk(Socket sock) {
-        //    //Main Talk loop
-        //    while (true) {
-        //        sock.Receive(buffer);
-        //        WriteByteArray(buffer);
-
-        //        Console.Write("Say a thing: ");
-        //        sock.Send(ToByteArray(Console.ReadLine()));
-        //    }
-        //}
-        //public static void sendString(string s) {
-        //    sock.Send(ToByteArray(s));
-        //}
-
-        private static void WriteByteArray(byte[] b) {
-            foreach (byte x in b) {
-                if (x != 0) {
-                    Console.Write((char)x);
-                }
+        private static byte[] readBuffer=new byte[256];
+        public static bool hasData = false;
+        public static void Update() {
+            if (writeQueue.Count == 0) {
+                sock.Send(writeQueue.Dequeue());
             }
-            Console.WriteLine();
-            ClearBuffer();
-        }
-        private static string ByteToString(byte[] b) {
-            char[] x = new Char[b.GetLength(0)];
-            for (int i = 0; i <= b.GetLength(0)-1; i++) {
-                x[i]=(char)b[i];
-            }
-            return new String(x);
-        }
-        private static void ClearBuffer() {
-            buffer = new byte[256];
-        }
-        private static void AsynchRead() {
-            byte[] b=new byte[256];
-            sock.Receive(b);
-            buffer = b;
-        }
-        public static byte[] Read() {
-            read.Suspend();
-            byte[] tmp = buffer;
-            read.Resume();
-            return tmp;
+            sock.Receive(readBuffer);
+            Message m = readBuffer;
+            readQueue.Enqueue(m);
+            hasData = true;
         }
     }
 }
