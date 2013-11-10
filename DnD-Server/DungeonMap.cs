@@ -57,7 +57,14 @@ namespace DnD {
 
         public void ResetMap() {
             this.Grid = new object[100, 100];
+        }
 
+        public Point ConvertToGrid(Point p) {
+            return new Point(p.X / GRIDSIZE, p.Y / GRIDSIZE);
+        }
+
+        private void mapPanel_MouseClick(object sender, MouseEventArgs e) {
+            contextMenu.Show(e.Location);
         }
     }
 }
