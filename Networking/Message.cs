@@ -16,15 +16,24 @@ namespace Networking {
             NPC
         };
         public Message(Head h) {
-            this.mssg[0] = (byte)(int)h;
+            if (h == Head.EMPTY) {
+                mssg=new byte[256];
+            }
+            this.mssg[0] = (byte)h;
         }
-        public static void getLogMessage(string s) {
+        public Message(Head h,byte[] b):this(h){
+            for (int i = 1; i <= b.GetLength(0)-1; i++) {
+                this.mssg[i]=b[i-1];
+            }
+        }
+        public static Message getLogMessage(string s) {
             Message tmp=new Message(Head.LOG);
             byte[] msgArray=ToByteArray(s);
             for (int i = 0; i <= msgArray.GetLength(0) - 1; i++) {
                 tmp.mssg[i + 1] = msgArray[i];
             }
             Console.WriteLine(tmp);
+            return tmp;
         }
         public static byte[] ToByteArray(string s) {
             return new UnicodeEncoding().GetBytes(s);
@@ -35,6 +44,16 @@ namespace Networking {
                 s += (char)this.mssg[i];
             }
             return s;
+        }
+        public Head Header {
+            get {
+                return (Head)this.mssg[0];
+            }
+        }
+        public byte[] GetMessage {
+            get {
+                return this.mssg;
+            }
         }
     }
 }
