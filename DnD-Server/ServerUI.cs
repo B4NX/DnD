@@ -17,7 +17,7 @@ namespace DnD {
         }
 
         private void reset_Click(object sender, EventArgs e) {
-            this.DungeonMap.ResetMap();
+            ((ServerMap)this.DungeonMap).ResetMap();
         }
 
         protected override void sendMsgButton_Click(object sender, EventArgs e) {

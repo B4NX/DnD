@@ -32,6 +32,7 @@ namespace DnD {
             mapPanel.Width = GRIDSIZE * 100;
             mapPanel.Height = GRIDSIZE * 100;
             mapPanel.Paint += MakeGridSquares;
+            mapPanel.Paint += DrawObjects;
 
             this.ClientSize = new Size(361, 361);
 
@@ -43,8 +44,11 @@ namespace DnD {
             mapPanel.Top = -1000;
         }
 
-        public void AddMonster(int x, int y, string name, string race, int level) {
-
+        public void Update(object[,] grid) {
+            this.Grid = grid;
+        }
+        public void Update(int x, int y, object obj) {
+            this.Grid[x, y] = obj;
         }
 
         private void MakeGridSquares(object sender, PaintEventArgs e) {
@@ -60,11 +64,15 @@ namespace DnD {
             }
         }
 
-        public void ResetMap() {
-            this.Grid = new object[100, 100];
+        private void DrawObjects(object sender, PaintEventArgs e) {
+            for (int x = 0; x < this.Grid.GetLength(0); ++x) {
+                for (int y = 0; y < this.Grid.GetLength(1); ++y) {
+                    e.Graphics.DrawImage();
+                }
+            }
         }
 
-        public Point ConvertToGrid(Point p) {
+        public Point PointToGrid(Point p) {
             return new Point(p.X / GRIDSIZE, p.Y / GRIDSIZE);
         }
 

@@ -2,42 +2,51 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Drawing;
 
 namespace DnD {
     public class Monster {
-        public string Name { get; private set; }
-        public string Race { get; private set; }
-        public int Level { get; private set; }
-        public int HP { get; private set; }
+        public string Name;
+        public string Race;
+        public short Level;
+        public short HP;
 
-        public int Str { get; private set; }
-        public int Con { get; private set; }
-        public int Dex { get; private set; }
-        public int Int { get; private set; }
-        public int Wis { get; private set; }
-        public int Cha { get; private set; }
+        public short Str;
+        public short Con;
+        public short Dex;
+        public short Int;
+        public short Wis;
+        public short Cha;
 
-        public int Ac { get; private set; }
-        public int Fort { get; private set; }
-        public int Ref { get; private set; }
-        public int Will { get; private set; }
+        public short Ac;
+        public short Fort;
+        public short Ref;
+        public short Will;
 
-        public int Spd { get; private set; }
+        public short Spd;
 
-        public int D4;
-        public int D6;
-        public int D8a;
-        public int D8b;
-        public int D12;
-        public int D20;
+        public byte D4;
+        public byte D6;
+        public byte D8a;
+        public byte D8b;
+        public byte D12;
+        public byte D20;
+
+        public short x;
+        public short y;
 
         private MonsterStatsPane pane;
 
-        public Monster(string name, string race, int level, int hp) {
+        public Monster(int x, int y, string name, string race, short level, short hp) {
+            this.x = (short)x;
+            this.y = (short)y;
             this.Name = name;
             this.Race = race;
             this.Level = level;
             this.HP = hp;
+        }
+        public Monster(Point p, string name, string race, short level, short hp) : this(p.X, p.Y, name, race, level, hp) {
+
         }
 
         public MonsterStatsPane GetPane(MainUI parent) {
