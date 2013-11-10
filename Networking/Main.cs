@@ -12,7 +12,7 @@ namespace Networking {
                 Console.WriteLine("Server");
                 Server.init();
                 Server.connect();
-                Server.Test();
+                //Server.Test();
             } else if (ans.ToUpper() == "C") {
                 Console.WriteLine("Client");
                 Client.init();
