@@ -62,5 +62,9 @@ namespace Networking {
                 }
             }
         }
+
+        public static void Close() {
+            sock.Close();
+        }
     }
 }

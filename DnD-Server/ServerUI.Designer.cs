@@ -39,6 +39,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(500, 408);
             this.Name = "ServerUI";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.ServerUI_FormClosed);
             this.ResumeLayout(false);
             this.PerformLayout();
 

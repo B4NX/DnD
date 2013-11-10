@@ -13,6 +13,8 @@ namespace DnD {
     public partial class ServerUI : MainUI {
         public ServerUI() {
             InitializeComponent();
+            Networking.Server.init();
+            Networking.Server.connect();
 
             DungeonMap = new ServerMap(this);
             DungeonMap.Show(this);
@@ -75,6 +77,10 @@ namespace DnD {
                 //Debug.WriteLine("Recevied message from server: " + m.ToString());
                 readUIQueue.Enqueue(m.ToString());
             }
+        }
+
+        private void ServerUI_FormClosed(object sender, FormClosedEventArgs e) {
+            Server.Close();
         }
     }
 }

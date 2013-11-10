@@ -114,5 +114,11 @@ namespace Networking {
         private static void clearBuffer(ref byte[] b){
             b = new byte[b.Length];
         }
+
+        public static void Close() {
+            foreach (KeyValuePair<string,Socket> kvp in clients){
+                kvp.Value.Close();
+            }
+        }
     }
 }
