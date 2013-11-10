@@ -67,7 +67,11 @@ namespace DnD {
         private void DrawObjects(object sender, PaintEventArgs e) {
             for (int x = 0; x < this.Grid.GetLength(0); ++x) {
                 for (int y = 0; y < this.Grid.GetLength(1); ++y) {
-                    e.Graphics.DrawImage();
+                    if (Grid[x, y] != null) {
+                        if (Grid[x, y] is Player) {
+                            //(Player)Grid[x, y]
+                        }
+                    }
                 }
             }
         }

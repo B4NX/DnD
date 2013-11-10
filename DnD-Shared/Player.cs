@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Drawing;
 
 namespace DnD {
     public class Player {
@@ -34,6 +35,8 @@ namespace DnD {
         public int D8b;
         public int D12;
         public int D20;
+
+        public Color Color;
 
         private PlayerStatsPane pane;
 
