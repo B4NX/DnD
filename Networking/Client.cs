@@ -46,16 +46,20 @@ namespace Networking {
         }
         private static byte[] readBuffer=new byte[256];
         public static void Update() {
-            while (true) {
+            bool hasSocket = true;
+            while (hasSocket) {
                 //Send
-                if (writeQueue.Count != 0) {
-                    System.Diagnostics.Debug.WriteLine("x");
-                    sock.Send(writeQueue.Dequeue().GetMessage);
-                } else if (writeQueue.Count == 0) {
-                    sock.Send(new Message(Message.Head.EMPTY).GetMessage);
+                try {
+                    if (writeQueue.Count != 0) {
+                        sock.Send(writeQueue.Dequeue().GetMessage);
+                    }
+                    else if (writeQueue.Count == 0) {
+                        sock.Send(new Message(Message.Head.EMPTY).GetMessage);
+                    }
+                    //Receive
+                    sock.Receive(readBuffer);
                 }
-                //Receive
-                sock.Receive(readBuffer);
+                catch (SocketException e) { Debug.WriteLine(e.Message); sock.Close(); hasSocket = false; }
                 Message m = new Message((Message.Head)readBuffer[0], readBuffer);
                 if (m.Header != Message.Head.EMPTY) {
                     readQueue.Enqueue(m);

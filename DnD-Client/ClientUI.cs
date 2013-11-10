@@ -37,7 +37,7 @@ namespace DnD
         private void Application_Idle(object sender, EventArgs e) {
             if (readUIQueue.Count > 0) {
                 string msg = readUIQueue.Dequeue();
-                Debug.WriteLine("Something on the queue (len " + readUIQueue.Count + ")! it's " + msg);
+                Debug.WriteLine("Something on the queue (len " + readUIQueue.Count + ")! it's " + msg + Environment.NewLine);
                 adventureLog += msg;
                 adventureLogBox.Text += msg;
             }
@@ -59,7 +59,7 @@ namespace DnD
         private void logClientAdventure() {
             if (Client.readQueue.Count != 0) {
                 Networking.Message m=Client.readQueue.Dequeue();
-                Debug.WriteLine("Received message from server: " + m.ToString());
+                Debug.WriteLine("Received message from server: " + m.ToString() + Environment.NewLine);
                 readUIQueue.Enqueue(m.ToString());
             }
         }
