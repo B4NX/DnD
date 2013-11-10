@@ -30,6 +30,14 @@
         {
             this.SuspendLayout();
             // 
+            // playerList
+            // 
+            this.playerList.LineColor = System.Drawing.Color.Black;
+            // 
+            // monsterList
+            // 
+            this.monsterList.LineColor = System.Drawing.Color.Black;
+            // 
             // ClientUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -37,6 +45,7 @@
             this.ClientSize = new System.Drawing.Size(490, 406);
             this.Name = "ClientUI";
             this.Text = "DnD - Player";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.ClientUI_FormClosed);
             this.ResumeLayout(false);
             this.PerformLayout();
 
