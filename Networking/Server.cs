@@ -17,7 +17,7 @@ namespace Networking {
         public static void init() {
             sock = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             IPEndPoint ep = new IPEndPoint(IPAddress.Any, 666);
-            sock.Bind(ep);            
+            sock.Bind(ep);
         }
         public static Socket connect() {
             sock.Listen(Int32.MaxValue);
@@ -44,6 +44,8 @@ namespace Networking {
             while (true) {
                 s.Receive(fubar);
                 WriteByteArray(ref fubar);
+
+                s.Send(ToByteArray(Console.ReadLine()));
             }
         }
         public static void Talk(Socket client) {
@@ -56,6 +58,10 @@ namespace Networking {
                 WriteByteArray(ref buffer);
             }
         }
+        public static void Write() {
+
+        }
+
         private static void WriteByteArray(ref byte[] b) {
             foreach (byte x in b) {
                 if (x != 0) {

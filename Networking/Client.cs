@@ -16,7 +16,6 @@ namespace Networking {
         private static Socket sock;
         private static byte[] buffer=new byte[256];
         private static Thread read;
-        
         public static void init() {
             sock = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
         }
@@ -40,19 +39,22 @@ namespace Networking {
             read=new Thread(AsynchRead);
             read.Start();
         }
-        public static void talk(Socket sock) {
-            //Main Talk loop
-            while (true) {
-                sock.Receive(buffer);
-                WriteByteArray(buffer);
+        public static void WriteMessage(Message m) {
+            sock.Send(m);
+        }
+        //public static void talk(Socket sock) {
+        //    //Main Talk loop
+        //    while (true) {
+        //        sock.Receive(buffer);
+        //        WriteByteArray(buffer);
 
-                Console.Write("Say a thing: ");
-                sock.Send(ToByteArray(Console.ReadLine()));
-            }
-        }
-        public static void sendString(string s) {
-            sock.Send(ToByteArray(s));
-        }
+        //        Console.Write("Say a thing: ");
+        //        sock.Send(ToByteArray(Console.ReadLine()));
+        //    }
+        //}
+        //public static void sendString(string s) {
+        //    sock.Send(ToByteArray(s));
+        //}
 
         private static void WriteByteArray(byte[] b) {
             foreach (byte x in b) {
@@ -63,8 +65,12 @@ namespace Networking {
             Console.WriteLine();
             ClearBuffer();
         }
-        private static byte[] ToByteArray(string s) {
-            return new UnicodeEncoding().GetBytes(s);
+        private static string ByteToString(byte[] b) {
+            char[] x = new Char[b.GetLength(0)];
+            for (int i = 0; i <= b.GetLength(0)-1; i++) {
+                x[i]=(char)b[i];
+            }
+            return new String(x);
         }
         private static void ClearBuffer() {
             buffer = new byte[256];

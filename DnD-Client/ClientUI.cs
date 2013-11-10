@@ -22,15 +22,15 @@ namespace DnD
 
             DungeonMap = new DungeonMap(this);
             DungeonMap.Show(this);
-            Client.init(new IPEndPoint(IPAddress.Parse("129.168.20.144"),666));
+            Client.init(new IPEndPoint(IPAddress.Parse("192.168.20.144"),666));
         }
 
-        protected override void sendMsgButton_Click(object sender, EventArgs e) {     
+        protected override void sendMsgButton_Click(object sender, EventArgs e) {
             //log the message, then clear the textbox.
             string msg = msgEntryBox.Text;
             logAdventure(msg, "Player");
             msgEntryBox.Text = "";
-            Client.sendString(msg);
+            Client.WriteMessage(Networking.Message.getLogMessage(msg));
         }
 
         public override void logAdventure(string msg, string sender) {
