@@ -19,6 +19,7 @@ namespace DnD {
 
             Thread update = new Thread(LogUpdate);
             update.Start();
+            Application.Idle += Application_Idle;
         }
 
         private void reset_Click(object sender, EventArgs e) {
@@ -33,8 +34,20 @@ namespace DnD {
             Networking.Server.SendToAll(Networking.Message.ToByteArray(msg));
         }
 
+        private void Application_Idle(object sender, EventArgs e) {
+            if (readUIQueue.Count > 0) {
+                string msg = readUIQueue.Dequeue();
+                //Debug.WriteLine("something on the queue (len " + readUIQueue.Count + ")! it's " + msg);
+                adventureLog += msg;
+                adventureLogBox.Text += msg;
+                Networking.Server.SendToAll(Networking.Message.ToByteArray(msg));
+            }
+        }
+
         public void LogUpdate() {
-            
+            while (true) {
+                logServerAdventure();
+            }
         }
 
         protected override void sendMsgButton_Click(object sender, EventArgs e) {
@@ -53,6 +66,15 @@ namespace DnD {
 
             //if (
             return msg;
+        }
+
+        private static Queue<string> readUIQueue = new Queue<string>();
+        private void logServerAdventure() {
+            if (Server.readQueue.Count != 0) {
+                Networking.Message m = Server.readQueue.Dequeue();
+                //Debug.WriteLine("Recevied message from server: " + m.ToString());
+                readUIQueue.Enqueue(m.ToString());
+            }
         }
     }
 }
