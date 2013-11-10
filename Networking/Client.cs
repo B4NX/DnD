@@ -15,11 +15,14 @@ namespace Networking {
         /// </summary>
         private static Socket sock;
         private static byte[] buffer=new byte[256];
+        private static Thread read;
+        
         public static void init() {
             sock = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
         }
         public static void init(IPEndPoint endPoint) {
-
+            sock = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+            Connect(endPoint);
         }
         public static void Connect(IPEndPoint endPoint) {
             Debug.WriteLine("Waiting for connection");
@@ -34,6 +37,8 @@ namespace Networking {
                 }
             }
             Debug.WriteLine("Connected!");
+            read=new Thread(AsynchRead);
+            read.Start();
         }
         public static void talk(Socket sock) {
             //Main Talk loop
@@ -63,6 +68,17 @@ namespace Networking {
         }
         private static void ClearBuffer() {
             buffer = new byte[256];
+        }
+        private static void AsynchRead() {
+            byte[] b=new byte[256];
+            sock.Receive(b);
+            buffer = b;
+        }
+        public static byte[] Read() {
+            read.Suspend();
+            byte[] tmp = buffer;
+            read.Resume();
+            return tmp;
         }
     }
 }

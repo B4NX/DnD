@@ -22,8 +22,7 @@ namespace DnD
 
             DungeonMap = new DungeonMap(this);
             DungeonMap.Show(this);
-            Client.init();
-            Client.Connect(new IPEndPoint(IPAddress.Parse("192.168.20.144"), 666));
+            Client.init(new IPEndPoint(IPAddress.Parse("129.168.20.144"),666));
         }
 
         protected override void sendMsgButton_Click(object sender, EventArgs e) {     
