@@ -8,6 +8,7 @@ using System.Diagnostics;
 
 namespace Networking {
     class Client {
+        private static byte[] buffer=new byte[256];
         public static void init() {
 
             Socket sock = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
@@ -25,16 +26,15 @@ namespace Networking {
             Debug.WriteLine("Connected!");
             sock.Send(ToByteArray("Talk"));
             
-            byte[] b = new byte[256];
-            sock.Receive(b);
-            WriteByeArray(b);
+            sock.Receive(buffer);
+            WriteByeArray(buffer);
 
             Console.WriteLine("Please say something nice to your \"friend\".");
             string s = Console.ReadLine();
             sock.Send(ToByteArray(s));
             while (true) {
-                sock.Receive(b);
-                WriteByeArray(b);
+                sock.Receive(buffer);
+                WriteByeArray(buffer);
 
                 Console.Write("Say a thing: ");
                 sock.Send(ToByteArray(Console.ReadLine()));
@@ -48,9 +48,13 @@ namespace Networking {
                 }
             }
             Console.WriteLine();
+            ClearBuffer();
         }
         private static byte[] ToByteArray(string s) {
             return new UnicodeEncoding().GetBytes(s);
+        }
+        private static void ClearBuffer() {
+            buffer = new byte[256];
         }
     }
 }
