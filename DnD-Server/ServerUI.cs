@@ -11,13 +11,14 @@ using System.Windows.Forms;
 namespace DnD {
     public partial class ServerUI : Form {
 
-        private string adventureLog;
+        private static string adventureLog;
 
         public ServerUI() {
             InitializeComponent();
         }
 
         private void sendMsgButton_Click(object sender, EventArgs e) {
+            //log the message, then clear the textbox.
             string msg = msgEntryBox.Text;
             logAdventure(msg);
             msgEntryBox.Text = "";
@@ -47,6 +48,10 @@ namespace DnD {
                     sendMsgButton.PerformClick();
                 }
             }
+        }
+
+        private void msgEntryBox_TextChanged(object sender, EventArgs e) {
+            if (msgEntryBox.Text == "\n") { msgEntryBox.Text = "";  }
         }
     }
 }
