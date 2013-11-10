@@ -45,7 +45,6 @@ namespace Networking {
             updateThread.Start();
         }
         private static byte[] readBuffer=new byte[256];
-        public static bool hasData = false;
         public static void Update() {
             while (true) {
                 //Send
@@ -60,7 +59,6 @@ namespace Networking {
                 sock.Receive(readBuffer);
                 Message m = readBuffer;
                 readQueue.Enqueue(m);
-                hasData = true;
             }
         }
     }
