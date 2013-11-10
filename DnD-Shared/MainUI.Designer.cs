@@ -142,7 +142,7 @@
         private System.Windows.Forms.Label dndlabel;
         protected System.Windows.Forms.TreeView playerList;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox adventureLogBox;
+        protected System.Windows.Forms.TextBox adventureLogBox;
         private System.Windows.Forms.Label label2;
         protected System.Windows.Forms.TreeView monsterList;
         private System.Windows.Forms.Label label3;
