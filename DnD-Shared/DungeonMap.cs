@@ -73,7 +73,7 @@ namespace DnD {
                             Brush b = new SolidBrush(plr.Color);
                             e.Graphics.FillEllipse(b, x * GRIDSIZE, y * GRIDSIZE, GRIDSIZE, GRIDSIZE);
                         }
-                        else if (Grid[x, y] is Monster) {
+                        else if (Grid[x, y] is Monster) {                            
                             Monster mtr = (Monster)Grid[x, y];
                             Brush b = new SolidBrush(mtr.Color);
                             e.Graphics.FillEllipse(b, x * GRIDSIZE, y * GRIDSIZE, GRIDSIZE, GRIDSIZE);

@@ -29,13 +29,17 @@ namespace DnD {
         }
 
         protected override void mapPanel_MouseClick(object sender, MouseEventArgs e) {
-            contextMenu.Show(mapPanel.PointToScreen(e.Location));
-            lastClick = PointToClient(e.Location);
+            if (e.Button != MouseButtons.Left) {
+                contextMenu.Show(mapPanel.PointToScreen(e.Location));
+            }
+            lastClick = e.Location;
         }
 
         //Precondition: x and y are within Grid bounds
         public void AddMonster(Monster m) {
             this.Grid[m.x, m.y] = m;
+            this.ParentUI.AddMonster(m);
+            this.Refresh();
         }
         public void ResetMap() {
             this.Grid = new object[100, 100];
