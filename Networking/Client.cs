@@ -12,13 +12,11 @@ namespace Networking {
 
             Socket sock = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             IPEndPoint ep = new IPEndPoint(IPAddress.Parse("192.168.20.144"), 666);
-            sock.Bind(ep);
             sock.Listen(Int32.MaxValue);
             Debug.WriteLine("Waiting for connection");
-            Socket client;
             while (true) {
                 try {
-                    client = sock.Accept();
+                    sock.Connect(ep);
                     break;
                 } catch (SocketException e) {
                     Debug.WriteLine(e.Message);
@@ -26,13 +24,13 @@ namespace Networking {
                 }
             }
             Debug.WriteLine("Connected!");
-            client.Send(ToByteArray("Hi"));
+            sock.Send(ToByteArray("Hi"));
 
             byte[] b = new byte[256];
-            client.Receive(b);
+            sock.Receive(b);
             Console.WriteLine("Please say something nice to your \"friend\".");
             string s = Console.ReadLine();
-            client.Send(ToByteArray(s));
+            sock.Send(ToByteArray(s));
             while (true) ;
 
         }

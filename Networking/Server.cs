@@ -9,7 +9,7 @@ using System.Diagnostics;
 namespace Networking {
     class Server {
         public static void init() {
-
+            
             Socket sock = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             IPEndPoint ep = new IPEndPoint(IPAddress.Any, 666);
             sock.Bind(ep);

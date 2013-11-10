@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 
 namespace Networking {
-    class Main {
+    class AnythingYouWant {
         public static void Main(string[] args) {
             Console.Write("S/C: ");
             string ans=Console.ReadLine();
