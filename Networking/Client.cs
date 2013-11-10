@@ -41,6 +41,7 @@ namespace Networking {
                     Console.Write((char)x);
                 }
             }
+            Console.WriteLine();
         }
         private static byte[] ToByteArray(string s) {
             return new UnicodeEncoding().GetBytes(s);
