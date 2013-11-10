@@ -10,16 +10,17 @@ using System.Windows.Forms;
 namespace DnD {
     public partial class DungeonMap : Form {
 
-        ServerUI ParentUI;
+        protected MainUI ParentUI;
 
         public object[,] Grid;
         public const int GRIDSIZE = 20;
 
         public Pen pen = new Pen(Color.Black);
-
-        public DungeonMap(ServerUI parent) {
+        protected DungeonMap() {
             InitializeComponent();
-
+        }
+        public DungeonMap(MainUI parent) {
+            InitializeComponent();
             this.ParentUI = parent;
             this.Shown += (object sender, EventArgs e) => {
                 this.Left = ParentUI.Left + ParentUI.Width;
@@ -31,6 +32,7 @@ namespace DnD {
             mapPanel.Width = GRIDSIZE * 100;
             mapPanel.Height = GRIDSIZE * 100;
             mapPanel.Paint += MakeGridSquares;
+            mapPanel.Paint += DrawObjects;
 
             this.ClientSize = new Size(361, 361);
 
@@ -40,6 +42,13 @@ namespace DnD {
             }
             mapPanel.Left = -1000;
             mapPanel.Top = -1000;
+        }
+
+        public void Update(object[,] grid) {
+            this.Grid = grid;
+        }
+        public void Update(int x, int y, object obj) {
+            this.Grid[x, y] = obj;
         }
 
         private void MakeGridSquares(object sender, PaintEventArgs e) {
@@ -55,16 +64,20 @@ namespace DnD {
             }
         }
 
-        public void ResetMap() {
-            this.Grid = new object[100, 100];
+        private void DrawObjects(object sender, PaintEventArgs e) {
+            for (int x = 0; x < this.Grid.GetLength(0); ++x) {
+                for (int y = 0; y < this.Grid.GetLength(1); ++y) {
+                    e.Graphics.DrawImage();
+                }
+            }
         }
 
-        public Point ConvertToGrid(Point p) {
+        public Point PointToGrid(Point p) {
             return new Point(p.X / GRIDSIZE, p.Y / GRIDSIZE);
         }
 
-        private void mapPanel_MouseClick(object sender, MouseEventArgs e) {
-            contextMenu.Show(Point.Add(Point.Subtract(e.Location, new Size(this.HorizontalScroll.Value, this.VerticalScroll.Value)), new Size(this.Left - this.ClientSize.Width / 2, this.Top - this.ClientSize.Height / 2)));
+        protected virtual void mapPanel_MouseClick(object sender, MouseEventArgs e) {
+
         }
     }
 }

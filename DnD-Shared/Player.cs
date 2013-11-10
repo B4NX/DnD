@@ -43,7 +43,7 @@ namespace DnD {
             this.Class = plyrclass;
         }
 
-        public PlayerStatsPane GetPane(ServerUI parent) {
+        public PlayerStatsPane GetPane(MainUI parent) {
             if (pane == null || pane.ParentForm != parent) {
                 if (pane != null) { pane.Dispose(); }
                 pane = new PlayerStatsPane(parent, this); 

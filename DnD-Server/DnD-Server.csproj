@@ -46,32 +46,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Player.cs" />
-    <Compile Include="DungeonMap.cs">
+    <Compile Include="AddMonsterDialogue.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="DungeonMap.Designer.cs">
-      <DependentUpon>DungeonMap.cs</DependentUpon>
+    <Compile Include="AddMonsterDialogue.Designer.cs">
+      <DependentUpon>AddMonsterDialogue.cs</DependentUpon>
     </Compile>
-    <Compile Include="Monster.cs" />
-    <Compile Include="MonsterStatsPane.cs">
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ServerMap.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MonsterStatsPane.Designer.cs">
-      <DependentUpon>MonsterStatsPane.cs</DependentUpon>
-    </Compile>
-    <Compile Include="MonsterTreeNode.cs" />
-    <Compile Include="PlayerSkillsPane.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="PlayerSkillsPane.Designer.cs">
-      <DependentUpon>PlayerSkillsPane.cs</DependentUpon>
-    </Compile>
-    <Compile Include="PlayerStatsPane.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="PlayerStatsPane.Designer.cs">
-      <DependentUpon>PlayerStatsPane.cs</DependentUpon>
+    <Compile Include="ServerMap.Designer.cs">
+      <DependentUpon>ServerMap.cs</DependentUpon>
     </Compile>
     <Compile Include="ServerUI.cs">
       <SubType>Form</SubType>
@@ -79,19 +66,8 @@
     <Compile Include="ServerUI.Designer.cs">
       <DependentUpon>ServerUI.cs</DependentUpon>
     </Compile>
-    <Compile Include="Program.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="DungeonMap.resx">
-      <DependentUpon>DungeonMap.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="MonsterStatsPane.resx">
-      <DependentUpon>MonsterStatsPane.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="PlayerSkillsPane.resx">
-      <DependentUpon>PlayerSkillsPane.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="PlayerStatsPane.resx">
-      <DependentUpon>PlayerStatsPane.cs</DependentUpon>
+    <EmbeddedResource Include="AddMonsterDialogue.resx">
+      <DependentUpon>AddMonsterDialogue.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -102,6 +78,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="ServerMap.resx">
+      <DependentUpon>ServerMap.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ServerUI.resx">
       <DependentUpon>ServerUI.cs</DependentUpon>
     </EmbeddedResource>
@@ -116,6 +95,10 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DnD-Shared\DnD-Shared.csproj">
+      <Project>{338D2D7E-C05D-4B09-ABCE-702E97FECE98}</Project>
+      <Name>DnD-Shared</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Networking\Networking.csproj">
       <Project>{EF4A120E-0FB7-469E-8E64-4E4BCF75C14F}</Project>
       <Name>Networking</Name>

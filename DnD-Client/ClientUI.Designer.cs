@@ -1,4 +1,4 @@
-﻿namespace DnD_Client
+﻿namespace DnD
 {
     partial class ClientUI
     {
@@ -28,12 +28,22 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            this.SuspendLayout();
+            // 
+            // ClientUI
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Text = "Form1";
+            this.ClientSize = new System.Drawing.Size(490, 406);
+            this.Name = "ClientUI";
+            this.Text = "DnD - Player";
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
         }
 
         #endregion
+
     }
 }
 
