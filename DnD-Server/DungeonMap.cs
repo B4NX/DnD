@@ -64,7 +64,7 @@ namespace DnD {
         }
 
         private void mapPanel_MouseClick(object sender, MouseEventArgs e) {
-            contextMenu.Show(e.Location);
+            contextMenu.Show(Point.Add(Point.Subtract(e.Location, new Size(this.HorizontalScroll.Value, this.VerticalScroll.Value)), new Size(this.Left - this.ClientSize.Width / 2, this.Top - this.ClientSize.Height / 2)));
         }
     }
 }
