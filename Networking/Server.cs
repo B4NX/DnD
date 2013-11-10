@@ -46,32 +46,9 @@ namespace Networking {
             updateThread.Start();
             return client;
         }
-        public static void Test() {
-            Socket s = clients["Test"];
-            byte[] fubar = new byte[256];
-            while (true) {
-                s.Receive(fubar);
-                SendToAll(fubar);
-
-                WriteByteArray(ref fubar);
-
-                Console.Write("Type something: ");
-                SendToAll(ToByteArray(Console.ReadLine()));
-            }
-        }
         public static void SendToAll(byte[] b) {
             foreach (KeyValuePair<string, Socket> kvp in clients) {
                 kvp.Value.Send(b);
-            }
-        }
-        public static void Talk(Socket client) {
-            //Main Talk loop
-            while (true) {
-                Console.Write("Say thing: ");
-                client.Send(ToByteArray(Console.ReadLine()));
-
-                client.Receive(buffer);
-                WriteByteArray(ref buffer);
             }
         }
         public static Queue<Message> writeQueue = new Queue<Message>();
@@ -103,23 +80,6 @@ namespace Networking {
             Console.WriteLine(new Message(Message.Head.LOG, b).ToString());
             readQueue.Enqueue(new Message((Message.Head)b[0], b));
         }
-
-        private static void WriteByteArray(ref byte[] b) {
-            foreach (byte x in b) {
-                if (x != 0) {
-                    Console.Write((char)x);
-                }
-            }
-            Console.WriteLine();
-            clearBuffer(ref b);
-        }
-        private static byte[] ToByteArray(string s) {
-            return new UnicodeEncoding().GetBytes(s);
-        }
-        private static void clearBuffer(ref byte[] b){
-            b = new byte[b.Length];
-        }
-
         public static void Close() {
             List<string> toRemove = new List<string>();
             foreach (KeyValuePair<string,Socket> kvp in clients){
