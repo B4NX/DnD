@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Networking", "Networking\Ne
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetworkTest-Console", "NetWorkTest\NetworkTest-Console.csproj", "{FECF15AB-8702-40C1-84DE-E347E9978D29}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DnD-Shared", "DnD-Shared\DnD-Shared.csproj", "{338D2D7E-C05D-4B09-ABCE-702E97FECE98}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -59,6 +61,16 @@ Global
 		{FECF15AB-8702-40C1-84DE-E347E9978D29}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{FECF15AB-8702-40C1-84DE-E347E9978D29}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{FECF15AB-8702-40C1-84DE-E347E9978D29}.Release|x86.ActiveCfg = Release|Any CPU
+		{338D2D7E-C05D-4B09-ABCE-702E97FECE98}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{338D2D7E-C05D-4B09-ABCE-702E97FECE98}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{338D2D7E-C05D-4B09-ABCE-702E97FECE98}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{338D2D7E-C05D-4B09-ABCE-702E97FECE98}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{338D2D7E-C05D-4B09-ABCE-702E97FECE98}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{338D2D7E-C05D-4B09-ABCE-702E97FECE98}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{338D2D7E-C05D-4B09-ABCE-702E97FECE98}.Release|Any CPU.Build.0 = Release|Any CPU
+		{338D2D7E-C05D-4B09-ABCE-702E97FECE98}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{338D2D7E-C05D-4B09-ABCE-702E97FECE98}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{338D2D7E-C05D-4B09-ABCE-702E97FECE98}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

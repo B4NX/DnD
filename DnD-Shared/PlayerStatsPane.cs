@@ -10,10 +10,10 @@ using System.Windows.Forms;
 namespace DnD {
     public partial class PlayerStatsPane : Form {
 
-        private ServerUI ParentUI;
+        private MainUI ParentUI;
         private Player Player;
 
-        public PlayerStatsPane(ServerUI parent, Player p) {
+        public PlayerStatsPane(MainUI parent, Player p) {
             InitializeComponent();
 
             this.Player = p;

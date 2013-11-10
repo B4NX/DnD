@@ -10,14 +10,14 @@ using System.Windows.Forms;
 namespace DnD {
     public partial class DungeonMap : Form {
 
-        ServerUI ParentUI;
+        MainUI ParentUI;
 
         public object[,] Grid;
         public const int GRIDSIZE = 20;
 
         public Pen pen = new Pen(Color.Black);
 
-        public DungeonMap(ServerUI parent) {
+        public DungeonMap(MainUI parent) {
             InitializeComponent();
 
             this.ParentUI = parent;
@@ -40,6 +40,16 @@ namespace DnD {
             }
             mapPanel.Left = -1000;
             mapPanel.Top = -1000;
+
+            contextMenu.ItemClicked += (object sender, ToolStripItemClickedEventArgs e) => {
+                if (e.ClickedItem == addMonsterButton) {
+                    
+                }
+            };
+        }
+
+        public void AddMonster(int x, int y, string name, string race, int level) {
+
         }
 
         private void MakeGridSquares(object sender, PaintEventArgs e) {

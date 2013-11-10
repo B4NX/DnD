@@ -5,37 +5,19 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.IO;
 using System.Windows.Forms;
 
 namespace DnD {
-    public partial class ServerUI : Form {
-
-        private string adventureLog;
-        private DungeonMap DungeonMap;
-
+    public partial class ServerUI : MainUI {
         public ServerUI() {
             InitializeComponent();
-
-            DungeonMap = new DungeonMap(this);
-            DungeonMap.Show(this);
         }
 
-        private void sendMsgButton_Click(object sender, EventArgs e) {
-            //log the message, then clear the textbox.
-            string msg = msgEntryBox.Text;
-            logAdventure(msg, "DM");
-            msgEntryBox.Text = "";
+        private void reset_Click(object sender, EventArgs e) {
+            this.DungeonMap.ResetMap();
         }
 
-        public void logAdventure(string msg, string sender) {
-            //append DM prefix and newline, then log it to the main string and textbox.
-            msg = "[" + sender + "]: " + msg + "\n";
-            adventureLog += msg;
-            adventureLogBox.Text += msg;
-        }
-
-        private string parseCommand(string msg) {
+        protected string parseCommand(string msg) {
             string[] words = msg.Split(new char[] { ' ' });
             if (words[0] == "/whisper") {
                 //check if second word is a player name
@@ -44,26 +26,6 @@ namespace DnD {
 
             //if (
             return msg;
-        }
-
-        private void msgEntryBox_KeyPress(object sender, KeyEventArgs e) {
-            if (e.KeyData == Keys.Enter) {
-                if (Control.ModifierKeys != Keys.Control) {                    
-                    sendMsgButton.PerformClick();
-                }
-            }
-        }
-
-        private void msgEntryBox_TextChanged(object sender, EventArgs e) {
-            if (msgEntryBox.Text == "\n") { msgEntryBox.Text = "";  }
-        }
-
-        protected override void OnClosing(CancelEventArgs e) {
-            base.OnClosing(e);
-        }
-
-        private void reset_Click(object sender, EventArgs e) {
-            this.DungeonMap.ResetMap();
         }
     }
 }

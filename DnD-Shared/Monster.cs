@@ -40,7 +40,7 @@ namespace DnD {
             this.HP = hp;
         }
 
-        public MonsterStatsPane GetPane(ServerUI parent) {
+        public MonsterStatsPane GetPane(MainUI parent) {
             if (pane == null || pane.ParentForm != parent) {
                 if (pane != null) { pane.Dispose(); }
                 pane = new MonsterStatsPane(parent, this); 

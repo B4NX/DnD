@@ -10,10 +10,10 @@ using System.Windows.Forms;
 namespace DnD {
     public partial class MonsterStatsPane : Form {
 
-        private ServerUI ParentUI;
+        private MainUI ParentUI;
         private Monster Monster;
 
-        public MonsterStatsPane(ServerUI parent, Monster m) {
+        public MonsterStatsPane(MainUI parent, Monster m) {
             InitializeComponent();
 
             ParentUI = parent;
