@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DnD-Server", "DnD-Server\DnD-Server.csproj", "{506B6D9B-8BA8-43F2-A831-0816E2D5B9B7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DnD-Client", "DnD-Client\DnD-Client.csproj", "{1F293071-01A2-4E2C-A33B-68A3906DD59C}"
