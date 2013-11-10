@@ -45,9 +45,10 @@ namespace DnD
                 logClientAdventure();
             }
         }
+        private static Queue<string> readQueue = new Queue<string>();
         private void logClientAdventure() {
             if (Client.readQueue.Count != 0) {
-                this.adventureLogBox.Text += Client.readQueue.Dequeue().ToString();
+                readQueue.Enqueue(Client.readQueue.Dequeue().ToString());
             }
         }
     }
