@@ -12,19 +12,13 @@ namespace DnD {
     public partial class ServerUI : Form {
 
         private string adventureLog;
+        private DungeonMap DungeonMap;
 
         public ServerUI() {
             InitializeComponent();
 
-            Monster dragon = new Monster("Agararhag", "Dragon", 7, 15);
-            
-            MonsterTreeNode testnode = new MonsterTreeNode(dragon);
-            monsterList.NodeMouseDoubleClick += (object sender, TreeNodeMouseClickEventArgs e) => {
-                MonsterStatsPane pane = ((MonsterTreeNode)e.Node).Monster.GetPane(this);
-                pane.Show();
-            };
-
-            this.monsterList.Nodes.Add(testnode);
+            DungeonMap = new DungeonMap(this);
+            DungeonMap.Show(this);
         }
 
         private void sendMsgButton_Click(object sender, EventArgs e) {
@@ -65,10 +59,11 @@ namespace DnD {
         }
 
         protected override void OnClosing(CancelEventArgs e) {
-            foreach (MonsterTreeNode m in this.monsterList.Nodes) {
-                m.Monster.Dispose();
-            }
             base.OnClosing(e);
+        }
+
+        private void button1_Click(object sender, EventArgs e) {
+            this.DungeonMap.ResetMap();
         }
     }
 }
