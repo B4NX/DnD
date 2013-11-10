@@ -42,7 +42,7 @@ namespace DnD {
                 //Debug.WriteLine("something on the queue (len " + readUIQueue.Count + ")! it's " + msg);
                 adventureLog += msg;
                 adventureLogBox.Text += msg;
-                Networking.Server.SendToAll(Networking.Message.ToByteArray(msg));
+                Networking.Server.SendToAll(Networking.Message.getLogMessage(msg).GetMessage);
             }
         }
 
@@ -81,6 +81,7 @@ namespace DnD {
 
         private void ServerUI_FormClosed(object sender, FormClosedEventArgs e) {
             Server.Close();
+            Environment.Exit(0);
         }
     }
 }

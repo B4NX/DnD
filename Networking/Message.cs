@@ -23,13 +23,13 @@ namespace Networking {
         }
         public Message(Head h,byte[] b):this(h){
             for (int i = 1; i < b.GetLength(0); i++) {
-                this.mssg[i]=b[i-1];
+                this.mssg[i]=b[i];
             }
         }
         public static Message getLogMessage(string s) {
             Message tmp=new Message(Head.LOG);
             byte[] msgArray=ToByteArray(s);
-            for (int i = 0; i <= msgArray.GetLength(0) - 1; i++) {
+            for (int i = 0; i < msgArray.GetLength(0); ++i) {
                 tmp.mssg[i + 1] = msgArray[i];
             }
             Console.WriteLine(tmp);
