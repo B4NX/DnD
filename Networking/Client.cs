@@ -12,7 +12,6 @@ namespace Networking {
 
             Socket sock = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             IPEndPoint ep = new IPEndPoint(IPAddress.Parse("192.168.20.144"), 666);
-            sock.Listen(Int32.MaxValue);
             Debug.WriteLine("Waiting for connection");
             while (true) {
                 try {
@@ -25,9 +24,11 @@ namespace Networking {
             }
             Debug.WriteLine("Connected!");
             sock.Send(ToByteArray("Hi"));
-
+            
             byte[] b = new byte[256];
             sock.Receive(b);
+            WriteByeArray(b);
+
             Console.WriteLine("Please say something nice to your \"friend\".");
             string s = Console.ReadLine();
             sock.Send(ToByteArray(s));

@@ -26,11 +26,17 @@ namespace Networking {
                 }
             }
             Debug.WriteLine("Connected!");
+
             byte[] b = new byte[256];
             client.Receive(b);
+            WriteByeArray(b);
+            
             Console.WriteLine("Please say something nice to your \"friend\".");
             string s=Console.ReadLine();
             client.Send(ToByteArray(s));
+
+            client.Receive(b);
+            WriteByeArray(b);
             while (true) ;
             
         }
