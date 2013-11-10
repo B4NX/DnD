@@ -16,7 +16,9 @@ namespace DnD {
         }
 
         private void connectBtn_Click(object sender, EventArgs e) {
-            Client.init(new IPEndPoint(IPAddress.Parse(ipBox.Text), Int16.Parse(portBox.Text)));
+            //Client.init(new IPEndPoint(IPAddress.Parse("192.168.20.144"), 666));
+            ClientUI win = new ClientUI();
+            win.Show(this);
         }
     }
 }

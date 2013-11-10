@@ -21,6 +21,7 @@ namespace DnD
 
             DungeonMap = new DungeonMap(this);
             DungeonMap.Show(this);
+            Client.init(new System.Net.IPEndPoint(System.Net.IPAddress.Parse("192.168.20.144"),666));
             Thread update = new Thread(Update);
             update.Start();
         }
@@ -38,7 +39,7 @@ namespace DnD
             //Now send msg on to the server
             Client.writeQueue.Enqueue(Networking.Message.getLogMessage(msg));
         }
-        public void Update() {
+        public void LogUpdate() {
             logClientAdventure();
         }
         private void logClientAdventure() {
