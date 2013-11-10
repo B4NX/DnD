@@ -84,6 +84,10 @@
       <Project>{338D2D7E-C05D-4B09-ABCE-702E97FECE98}</Project>
       <Name>DnD-Shared</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Networking\Networking.csproj">
+      <Project>{ef4a120e-0fb7-469e-8e64-4e4bcf75c14f}</Project>
+      <Name>Networking</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

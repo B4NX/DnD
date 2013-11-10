@@ -9,7 +9,7 @@ using System.IO;
 using System.Threading;
 
 namespace Networking {
-    class Client {
+    public class Client {
         /// <summary>
         /// Represents the network service for the client.
         /// </summary>
@@ -18,13 +18,15 @@ namespace Networking {
         public static void init() {
             Socket sock = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
         }
-        public static void Connect(IPEndPoint endPoints) {
-            IPEndPoint ep = new IPEndPoint(IPAddress.Parse("192.168.20.144"), 666);
+        public static void init(IPEndPoint endPoint) {
+
+        }
+        public static void Connect(IPEndPoint endPoint) {
             Debug.WriteLine("Waiting for connection");
             //Handshake
             while (true) {
                 try {
-                    sock.Connect(ep);
+                    sock.Connect(endPoint);
                     break;
                 } catch (SocketException e) {
                     Debug.WriteLine(e.Message);
@@ -32,7 +34,6 @@ namespace Networking {
                 }
             }
             Debug.WriteLine("Connected!");
-            Console.WriteLine("Connected!");
         }
         public static void talk(Socket sock) {
             //Main Talk loop
@@ -43,6 +44,9 @@ namespace Networking {
                 Console.Write("Say a thing: ");
                 sock.Send(ToByteArray(Console.ReadLine()));
             }
+        }
+        public static void sendString(string s) {
+            sock.Send(ToByteArray(s));
         }
 
         private static void WriteByteArray(byte[] b) {

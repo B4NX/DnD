@@ -8,6 +8,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Networking;
+using System.Net;
+using System.Net.Sockets;
 
 namespace DnD
 {
@@ -19,6 +22,8 @@ namespace DnD
 
             DungeonMap = new DungeonMap(this);
             DungeonMap.Show(this);
+            Client.init();
+            Client.Connect(new IPEndPoint(IPAddress.Parse("192.168.20.144"), 666));
         }
 
         protected override void sendMsgButton_Click(object sender, EventArgs e) {     
@@ -26,6 +31,7 @@ namespace DnD
             string msg = msgEntryBox.Text;
             logAdventure(msg, "Player");
             msgEntryBox.Text = "";
+            Client.sendString(msg);
         }
 
         public override void logAdventure(string msg, string sender) {
