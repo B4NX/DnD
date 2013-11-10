@@ -76,20 +76,25 @@ namespace Networking {
         }
         public static Queue<Message> writeQueue = new Queue<Message>();
         public static void Update() {//r-s
-            while (true) {
-                //Recieve
-                foreach (KeyValuePair<string, Socket> kvp in clients) {
-                    byte[] tempRead = new byte[256];
-                    kvp.Value.Receive(tempRead);
-                    if (tempRead[0] != (byte)Message.Head.EMPTY) {
-                        parseMessage(tempRead);
+            while (clients.Count!=0) {
+                try {
+                    //Recieve
+                    foreach (KeyValuePair<string, Socket> kvp in clients) {
+                        byte[] tempRead = new byte[256];
+                        kvp.Value.Receive(tempRead);
+                        if (tempRead[0] != (byte)Message.Head.EMPTY) {
+                            parseMessage(tempRead);
+                        }
                     }
-                }
-                //Send
-                if (writeQueue.Count!=0){
-                    SendToAll(writeQueue.Dequeue().GetMessage);
-                } else if (writeQueue.Count == 0) {
-                    SendToAll(new Message(Message.Head.EMPTY).GetMessage);
+                    //Send
+                    if (writeQueue.Count != 0) {
+                        SendToAll(writeQueue.Dequeue().GetMessage);
+                    } else if (writeQueue.Count == 0) {
+                        SendToAll(new Message(Message.Head.EMPTY).GetMessage);
+                    }
+                } catch (SocketException e) {
+                    Debug.WriteLine(e);
+                    Close();
                 }
             }
         }
@@ -116,8 +121,13 @@ namespace Networking {
         }
 
         public static void Close() {
+            List<string> toRemove = new List<string>();
             foreach (KeyValuePair<string,Socket> kvp in clients){
                 kvp.Value.Close();
+                toRemove.Add(kvp.Key);
+            }
+            foreach (string s in toRemove) {
+                clients.Remove(s);
             }
         }
     }
