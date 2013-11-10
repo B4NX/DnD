@@ -6,10 +6,6 @@ using System.Text;
 namespace Networking {
     class AnythingYouWant {
         public static void Main(string[] args) {
-            byte[] b = { 65, 66, 67, 68 };
-            Message m = new Message(b);
-            Console.WriteLine(m);
-            Console.ReadKey();
             Console.Write("S/C: ");
             string ans=Console.ReadLine();
             if (ans.ToUpper() == "S") {

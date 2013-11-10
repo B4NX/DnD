@@ -42,7 +42,7 @@ namespace Networking {
             Console.WriteLine("Connected!");
             clients.Add("Test", client);
 
-            ClientConnected.BeginInvoke(client, new EventArgs(), null, null);
+            //ClientConnected.BeginInvoke(client, new EventArgs(), null, null);
 
             updateThread = new Thread(Update);
             updateThread.Start();
@@ -83,20 +83,20 @@ namespace Networking {
                 foreach (KeyValuePair<string, Socket> kvp in clients) {
                     byte[] tempRead = new byte[256];
                     kvp.Value.Receive(tempRead);
-                    if (new Message(tempRead).Header != Message.HeaderVal.EMPTY) {
+                    if (tempRead[0] != (byte)Message.Head.EMPTY) {
                         parseMessage(tempRead);
                     }
                 }
                 //Send
                 if (writeQueue.Count!=0){
-                    SendToAll(writeQueue.Dequeue());
+                    SendToAll(writeQueue.Dequeue().GetMessage);
                 } else if (writeQueue.Count == 0) {
-                    SendToAll(Message.EMPTY);
+                    SendToAll(new Message(Message.Head.EMPTY).GetMessage);
                 }
             }
         }
         public static void parseMessage(byte[] b) {
-            Console.WriteLine(new Message(b).ToString());
+            Console.WriteLine(new Message(Message.Head.LOG, b).ToString());
         }
 
         private static void WriteByteArray(ref byte[] b) {

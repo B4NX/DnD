@@ -50,14 +50,14 @@ namespace Networking {
                 //Send
                 if (writeQueue.Count != 0) {
                     System.Diagnostics.Debug.WriteLine("x");
-                    sock.Send(writeQueue.Dequeue());
+                    sock.Send(writeQueue.Dequeue().GetMessage);
                 } else if (writeQueue.Count == 0) {
-                    sock.Send(Message.EMPTY);
+                    sock.Send(new Message(Message.Head.EMPTY).GetMessage);
                 }
                 //Receive
                 sock.Receive(readBuffer);
-                Message m = new Message(readBuffer);
-                if (m.Header != Message.HeaderVal.EMPTY) {
+                Message m = new Message((Message.Head)readBuffer[0], readBuffer);
+                if (m.Header != Message.Head.EMPTY) {
                     readQueue.Enqueue(m);
                 }
             }
