@@ -8,14 +8,9 @@ using System.Text;
 using System.Windows.Forms;
 
 namespace DnD {
-    public partial class PlayerStatsPane : Form {
-        public PlayerStatsPane() {
+    public partial class PlayerSkillsPane : Form {
+        public PlayerSkillsPane() {
             InitializeComponent();
-        }
-
-        private void skillsbtn_Click(object sender, EventArgs e) {
-            Form f = new PlayerSkillsPane();
-            f.Show();
         }
     }
 }

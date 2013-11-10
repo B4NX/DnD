@@ -52,6 +52,12 @@
     <Compile Include="MonsterStatsPane.Designer.cs">
       <DependentUpon>MonsterStatsPane.cs</DependentUpon>
     </Compile>
+    <Compile Include="PlayerSkillsPane.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PlayerSkillsPane.Designer.cs">
+      <DependentUpon>PlayerSkillsPane.cs</DependentUpon>
+    </Compile>
     <Compile Include="PlayerStatsPane.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -68,6 +74,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="MonsterStatsPane.resx">
       <DependentUpon>MonsterStatsPane.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PlayerSkillsPane.resx">
+      <DependentUpon>PlayerSkillsPane.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PlayerStatsPane.resx">
       <DependentUpon>PlayerStatsPane.cs</DependentUpon>
@@ -93,6 +102,12 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Networking\Networking.csproj">
+      <Project>{EF4A120E-0FB7-469E-8E64-4E4BCF75C14F}</Project>
+      <Name>Networking</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

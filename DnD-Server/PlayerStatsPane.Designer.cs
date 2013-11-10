@@ -397,6 +397,7 @@
             this.skillsbtn.TabIndex = 5;
             this.skillsbtn.Text = "Skills";
             this.skillsbtn.UseVisualStyleBackColor = true;
+            this.skillsbtn.Click += new System.EventHandler(this.skillsbtn_Click);
             // 
             // groupBox2
             // 
@@ -569,7 +570,7 @@
             this.d4.TabIndex = 0;
             this.d4.TabStop = false;
             // 
-            // MonsterStatsPane
+            // PlayerStatsPane
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -578,7 +579,7 @@
             this.Controls.Add(this.stats);
             this.Controls.Add(this.playerNameLabel);
             this.Controls.Add(this.label1);
-            this.Name = "MonsterStatsPane";
+            this.Name = "PlayerStatsPane";
             this.Text = "DnD - Player Stats";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
