@@ -6,11 +6,17 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using Networking;
+using System.Net;
 
-namespace DnD_Client {
+namespace DnD {
     public partial class ClientConnectUI : Form {
         public ClientConnectUI() {
             InitializeComponent();
+        }
+
+        private void connectBtn_Click(object sender, EventArgs e) {
+            Client.init(new IPEndPoint(IPAddress.Parse(ipBox.Text), Int16.Parse(portBox.Text)));
         }
     }
 }
