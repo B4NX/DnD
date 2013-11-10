@@ -22,7 +22,7 @@ namespace Networking {
             this.mssg[0] = (byte)h;
         }
         public Message(Head h,byte[] b):this(h){
-            for (int i = 1; i <= b.GetLength(0)-1; i++) {
+            for (int i = 1; i < b.GetLength(0); i++) {
                 this.mssg[i]=b[i-1];
             }
         }
