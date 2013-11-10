@@ -24,6 +24,7 @@ namespace DnD
             //Client.init(new System.Net.IPEndPoint(System.Net.IPAddress.Parse("192.168.20.144"),666));
             Thread update = new Thread(LogUpdate);
             update.Start();
+            Application.Idle += Application_Idle;
         }
 
         protected override void sendMsgButton_Click(object sender, EventArgs e) {
@@ -31,6 +32,14 @@ namespace DnD
             string msg = msgEntryBox.Text;
             logAdventure(msg, "Player");
             msgEntryBox.Text = "";
+        }
+
+        private void Application_Idle(object sender, EventArgs e) {
+            if (readQueue.Count > 0) {
+                string msg = readQueue.Dequeue();
+                adventureLog += msg;
+                adventureLogBox.Text += msg;
+            }
         }
 
         public override void logAdventure(string msg, string sender) {
