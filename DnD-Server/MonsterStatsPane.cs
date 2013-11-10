@@ -12,5 +12,13 @@ namespace DnD {
         public MonsterStatsPane() {
             InitializeComponent();
         }
+
+        private void monsterinput_TextChanged(object sender, EventArgs e) {
+
+        }
+
+        private void monstersend_Click(object sender, EventArgs e) {
+            string msg = monstersend.Text;
+        }
     }
 }

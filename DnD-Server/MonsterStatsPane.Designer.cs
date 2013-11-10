@@ -57,8 +57,8 @@
             this.dicebox = new System.Windows.Forms.GroupBox();
             this.d12 = new System.Windows.Forms.PictureBox();
             this.d10 = new System.Windows.Forms.PictureBox();
-            this.d8_2 = new System.Windows.Forms.PictureBox();
-            this.d8 = new System.Windows.Forms.PictureBox();
+            this.d8b = new System.Windows.Forms.PictureBox();
+            this.d8a = new System.Windows.Forms.PictureBox();
             this.d6 = new System.Windows.Forms.PictureBox();
             this.d4 = new System.Windows.Forms.PictureBox();
             this.monstersend = new System.Windows.Forms.Button();
@@ -69,8 +69,8 @@
             this.dicebox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.d12)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.d10)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.d8_2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.d8)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.d8b)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.d8a)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.d6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.d4)).BeginInit();
             this.SuspendLayout();
@@ -396,8 +396,8 @@
             // 
             this.dicebox.Controls.Add(this.d12);
             this.dicebox.Controls.Add(this.d10);
-            this.dicebox.Controls.Add(this.d8_2);
-            this.dicebox.Controls.Add(this.d8);
+            this.dicebox.Controls.Add(this.d8b);
+            this.dicebox.Controls.Add(this.d8a);
             this.dicebox.Controls.Add(this.d6);
             this.dicebox.Controls.Add(this.d4);
             this.dicebox.Location = new System.Drawing.Point(226, 38);
@@ -423,21 +423,21 @@
             this.d10.TabIndex = 0;
             this.d10.TabStop = false;
             // 
-            // d8_2
+            // d8b
             // 
-            this.d8_2.Location = new System.Drawing.Point(53, 63);
-            this.d8_2.Name = "d8_2";
-            this.d8_2.Size = new System.Drawing.Size(39, 38);
-            this.d8_2.TabIndex = 0;
-            this.d8_2.TabStop = false;
+            this.d8b.Location = new System.Drawing.Point(53, 63);
+            this.d8b.Name = "d8b";
+            this.d8b.Size = new System.Drawing.Size(39, 38);
+            this.d8b.TabIndex = 0;
+            this.d8b.TabStop = false;
             // 
-            // d8
+            // d8a
             // 
-            this.d8.Location = new System.Drawing.Point(8, 63);
-            this.d8.Name = "d8";
-            this.d8.Size = new System.Drawing.Size(39, 38);
-            this.d8.TabIndex = 0;
-            this.d8.TabStop = false;
+            this.d8a.Location = new System.Drawing.Point(8, 63);
+            this.d8a.Name = "d8a";
+            this.d8a.Size = new System.Drawing.Size(39, 38);
+            this.d8a.TabIndex = 0;
+            this.d8a.TabStop = false;
             // 
             // d6
             // 
@@ -463,6 +463,7 @@
             this.monstersend.TabIndex = 7;
             this.monstersend.Text = "Send";
             this.monstersend.UseVisualStyleBackColor = true;
+            this.monstersend.Click += new System.EventHandler(this.monstersend_Click);
             // 
             // monsterinput
             // 
@@ -471,6 +472,7 @@
             this.monsterinput.Name = "monsterinput";
             this.monsterinput.Size = new System.Drawing.Size(309, 61);
             this.monsterinput.TabIndex = 6;
+            this.monsterinput.TextChanged += new System.EventHandler(this.monsterinput_TextChanged);
             // 
             // MonsterStatsPane
             // 
@@ -494,8 +496,8 @@
             this.dicebox.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.d12)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.d10)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.d8_2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.d8)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.d8b)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.d8a)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.d6)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.d4)).EndInit();
             this.ResumeLayout(false);
@@ -539,8 +541,8 @@
         private System.Windows.Forms.GroupBox dicebox;
         private System.Windows.Forms.PictureBox d4;
         private System.Windows.Forms.PictureBox d6;
-        private System.Windows.Forms.PictureBox d8;
-        private System.Windows.Forms.PictureBox d8_2;
+        private System.Windows.Forms.PictureBox d8a;
+        private System.Windows.Forms.PictureBox d8b;
         private System.Windows.Forms.PictureBox d10;
         private System.Windows.Forms.PictureBox d12;
         private System.Windows.Forms.Button monstersend;
