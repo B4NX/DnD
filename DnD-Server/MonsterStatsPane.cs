@@ -8,11 +8,9 @@ using System.Text;
 using System.Windows.Forms;
 
 namespace DnD {
-    public partial class ServerUI : Form {
-        public ServerUI() {
+    public partial class MonsterStatsPane : Form {
+        public MonsterStatsPane() {
             InitializeComponent();
-
-            
         }
     }
 }
