@@ -5,6 +5,7 @@ using System.Text;
 
 namespace Networking {
     public class Message {
+        public const Message EMPTY=new Message(HeaderVal.EMPTY);
         public enum HeaderVal {
             EMPTY,
             STAT,
@@ -19,6 +20,15 @@ namespace Networking {
         //First Byte is the header to indicate what the message means
         public Message() {
             mssg = new byte[256];
+        }
+        public Message(HeaderVal hv){
+            if (hv==HeaderVal.EMPTY){
+                mssg=new byte[256];
+            }
+        }
+        public Message(byte[] b) {
+            this.header = (HeaderVal)b[0];
+            this.mssg = b;
         }
         public static Message getLogMessage(string message) {
             Message temp = new Message();
@@ -58,6 +68,12 @@ namespace Networking {
                 }
             }
             return s;
+        }
+
+        public HeaderVal Header {
+            get {
+                return this.header;
+            }
         }
     }
 }

@@ -5,6 +5,7 @@ using System.Text;
 using System.Net;
 using System.Net.Sockets;
 using System.Diagnostics;
+using System.Threading;
 
 namespace Networking {
     class Server {
@@ -14,6 +15,7 @@ namespace Networking {
         private static Socket sock;
         public static Dictionary<string, Socket> clients = new Dictionary<string, Socket>();
         static byte[] buffer = new byte[256];
+        public static Thread updateThread;
         public static void init() {
             sock = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             IPEndPoint ep = new IPEndPoint(IPAddress.Any, 666);
@@ -36,6 +38,8 @@ namespace Networking {
             Debug.WriteLine("Connected!");
             Console.WriteLine("Connected!");
             clients.Add("Test", client);
+            updateThread = new Thread(Update);
+            updateThread.Start();
             return client;
         }
         public static void Test() {
@@ -66,9 +70,26 @@ namespace Networking {
                 WriteByteArray(ref buffer);
             }
         }
-        public static void Write() {
-
+        public static Queue<Message> writeQueue = new Queue<Message>();
+        public static void Update() {//r-s
+            while (true) {
+                //Recieve
+                foreach (KeyValuePair<string, Socket> kvp in clients) {
+                    byte[] tempRead = new byte[256];
+                    kvp.Value.Receive(tempRead);
+                    if (new Message(tempRead).Header != Message.HeaderVal.EMPTY) {
+                        parseMessage(tempRead);
+                    }
+                }
+                //Send
+                if (writeQueue.Count!=0){
+                    SendToAll(writeQueue.Dequeue());
+                } else if (writeQueue.Count == 0) {
+                    SendToAll(Message.EMPTY);
+                }
+            }
         }
+        public static void parseMessage(byte[] b);
 
         private static void WriteByteArray(ref byte[] b) {
             foreach (byte x in b) {

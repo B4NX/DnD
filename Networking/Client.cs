@@ -15,7 +15,7 @@ namespace Networking {
         /// </summary>
         private static Socket sock;
         private static byte[] buffer=new byte[256];
-        private static Thread update;
+        public static Thread updateThread;
 
         public static Queue<Message> writeQueue = new Queue<Message>();
         public static Queue<Message> readQueue = new Queue<Message>();
@@ -26,7 +26,7 @@ namespace Networking {
         public static void init(IPEndPoint endPoint) {
             sock = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             Connect(endPoint);
-        }
+        }        
         public static void Connect(IPEndPoint endPoint) {
             Debug.WriteLine("Waiting for connection");
             //Handshake
@@ -40,20 +40,28 @@ namespace Networking {
                 }
             }
             Debug.WriteLine("Connected!");
-            update=new Thread(Update);
-            update.Start();
+            updateThread=new Thread(Update);
+            updateThread.Name = "Network-C-Update";
+            updateThread.Start();
         }
         private static byte[] readBuffer=new byte[256];
         public static bool hasData = false;
         public static void Update() {
-            if (writeQueue.Count != 0) {
-                System.Diagnostics.Debug.WriteLine("x");
-                sock.Send(writeQueue.Dequeue());
+            while (true) {
+                //Send
+                Debug.WriteLine(writeQueue.Count);
+                if (writeQueue.Count != 0) {
+                    System.Diagnostics.Debug.WriteLine("x");
+                    sock.Send(writeQueue.Dequeue());
+                } else if (writeQueue.Count == 0) {
+                    sock.Send(Message.EMPTY);
+                }
+                //Receive
+                sock.Receive(readBuffer);
+                Message m = readBuffer;
+                readQueue.Enqueue(m);
+                hasData = true;
             }
-            sock.Receive(readBuffer);
-            Message m = readBuffer;
-            readQueue.Enqueue(m);
-            hasData = true;
         }
     }
 }
