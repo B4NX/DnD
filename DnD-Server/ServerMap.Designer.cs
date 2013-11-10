@@ -28,18 +28,24 @@
             this.addMonsterButton = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.loadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.setBackgroundColorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.setcolor = new System.Windows.Forms.ToolStripMenuItem();
             this.setimage = new System.Windows.Forms.ToolStripMenuItem();
             this.addEnemyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newmonster = new System.Windows.Forms.ToolStripMenuItem();
-            this.loadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.paintWallsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.paintFloorsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenu.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // mapPanel
+            // 
+            this.mapPanel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.mapPanel_MouseMove);
             // 
             // contextMenu
             // 
@@ -76,11 +82,24 @@
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(46, 20);
             this.fileToolStripMenuItem.Text = "File...";
             // 
+            // newToolStripMenuItem
+            // 
+            this.newToolStripMenuItem.Name = "newToolStripMenuItem";
+            this.newToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
+            this.newToolStripMenuItem.Text = "New";
+            this.newToolStripMenuItem.Click += new System.EventHandler(this.newToolStripMenuItem_Click);
+            // 
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
             this.saveToolStripMenuItem.Text = "Save";
+            // 
+            // loadToolStripMenuItem
+            // 
+            this.loadToolStripMenuItem.Name = "loadToolStripMenuItem";
+            this.loadToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
+            this.loadToolStripMenuItem.Text = "Load";
             // 
             // editToolStripMenuItem
             // 
@@ -117,7 +136,9 @@
             // addEnemyToolStripMenuItem
             // 
             this.addEnemyToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.newmonster});
+            this.newmonster,
+            this.paintWallsToolStripMenuItem,
+            this.paintFloorsToolStripMenuItem});
             this.addEnemyToolStripMenuItem.Name = "addEnemyToolStripMenuItem";
             this.addEnemyToolStripMenuItem.Size = new System.Drawing.Size(50, 20);
             this.addEnemyToolStripMenuItem.Text = "Add...";
@@ -130,18 +151,19 @@
             this.newmonster.Text = "New Monster...";
             this.newmonster.Click += new System.EventHandler(this.newMonsterToolStripMenuItem_Click);
             // 
-            // loadToolStripMenuItem
+            // paintWallsToolStripMenuItem
             // 
-            this.loadToolStripMenuItem.Name = "loadToolStripMenuItem";
-            this.loadToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.loadToolStripMenuItem.Text = "Load";
+            this.paintWallsToolStripMenuItem.Name = "paintWallsToolStripMenuItem";
+            this.paintWallsToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
+            this.paintWallsToolStripMenuItem.Text = "Paint Walls";
+            this.paintWallsToolStripMenuItem.Click += new System.EventHandler(this.paintWallsToolStripMenuItem_Click);
             // 
-            // newToolStripMenuItem
+            // paintFloorsToolStripMenuItem
             // 
-            this.newToolStripMenuItem.Name = "newToolStripMenuItem";
-            this.newToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.newToolStripMenuItem.Text = "New";
-            this.newToolStripMenuItem.Click += new System.EventHandler(this.newToolStripMenuItem_Click);
+            this.paintFloorsToolStripMenuItem.Name = "paintFloorsToolStripMenuItem";
+            this.paintFloorsToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
+            this.paintFloorsToolStripMenuItem.Text = "Paint Floors";
+            this.paintFloorsToolStripMenuItem.Click += new System.EventHandler(this.paintFloorsToolStripMenuItem_Click);
             // 
             // ServerMap
             // 
@@ -176,5 +198,7 @@
         private System.Windows.Forms.ToolStripMenuItem setBackgroundColorToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem newToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem loadToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem paintWallsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem paintFloorsToolStripMenuItem;
     }
 }

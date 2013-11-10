@@ -10,8 +10,13 @@ using System.Windows.Forms;
 namespace DnD {
     public partial class ServerMap : DungeonMap {
 
+        private enum PaintState {
+            None, Floor, Wall
+        }
+
         private Point lastClick;
         private Point selectedTile = Point.Empty;
+        private PaintState painting = PaintState.None;
 
         public ServerMap(MainUI parent) : base(parent) {
             InitializeComponent();
@@ -91,6 +96,47 @@ namespace DnD {
         private void newToolStripMenuItem_Click(object sender, EventArgs e) {
             this.ResetMap();
             this.Refresh();
+        }
+
+        private void paintWallsToolStripMenuItem_Click(object sender, EventArgs e) {
+            if (paintWallsToolStripMenuItem.Checked) {
+                paintWallsToolStripMenuItem.Checked = false;
+                paintFloorsToolStripMenuItem.Checked = false;
+                painting = PaintState.None;
+            }
+            else {
+                paintWallsToolStripMenuItem.Checked = true;
+                paintFloorsToolStripMenuItem.Checked = false;
+                painting = PaintState.Wall;
+            }
+        }
+
+        private void paintFloorsToolStripMenuItem_Click(object sender, EventArgs e) {
+            if (paintFloorsToolStripMenuItem.Checked) {
+                paintWallsToolStripMenuItem.Checked = false;
+                paintFloorsToolStripMenuItem.Checked = false;
+                painting = PaintState.None;
+            }
+            else {
+                paintWallsToolStripMenuItem.Checked = false;
+                paintFloorsToolStripMenuItem.Checked = true;
+                painting = PaintState.Floor;
+            }
+        }
+
+        private void mapPanel_MouseMove(object sender, MouseEventArgs e) {
+            if (e.Button == MouseButtons.Left) {
+                selectedTile = new Point(e.X / GRIDSIZE, e.Y / GRIDSIZE);
+                if (painting == PaintState.Floor) {
+                    this.Grid[selectedTile.X, selectedTile.Y] = new Floor((short)selectedTile.X, (short)selectedTile.Y);
+                }
+                else if (painting == PaintState.Wall) {
+                    this.Grid[selectedTile.X, selectedTile.Y] = new Wall((short)selectedTile.X, (short)selectedTile.Y);
+                }
+
+                mapPanel.Refresh();
+            }
+
         }
     }
 }

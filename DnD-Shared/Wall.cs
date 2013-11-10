@@ -9,7 +9,7 @@ namespace DnD {
         public Color Color;
         public Image Image;
 
-        public Wall(short x, short y) : this(Color.White, x, y) { }
+        public Wall(short x, short y) : this(Color.Black, x, y) { }
         public Wall(Color c, short x, short y) {
             Color = c;
             this.x = x;
