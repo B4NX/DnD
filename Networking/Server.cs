@@ -16,6 +16,7 @@ namespace Networking {
             sock.Listen(Int32.MaxValue);
             Debug.WriteLine("Waiting for connection");
             Socket client;
+            //Handshake
             while (true) {
                 try {
                     client = sock.Accept();
@@ -37,7 +38,14 @@ namespace Networking {
 
             client.Receive(b);
             WriteByeArray(b);
-            while (true) ;
+
+            while (true) {
+                Console.Write("Say thing: ");
+                client.Send(ToByteArray(Console.ReadLine()));
+
+                client.Receive(b);
+                WriteByeArray(b);
+            }
             
         }
         private static void WriteByeArray(byte[] b) {

@@ -23,7 +23,7 @@ namespace Networking {
                 }
             }
             Debug.WriteLine("Connected!");
-            sock.Send(ToByteArray("Hi"));
+            sock.Send(ToByteArray("Talk"));
             
             byte[] b = new byte[256];
             sock.Receive(b);
@@ -32,7 +32,13 @@ namespace Networking {
             Console.WriteLine("Please say something nice to your \"friend\".");
             string s = Console.ReadLine();
             sock.Send(ToByteArray(s));
-            while (true) ;
+            while (true) {
+                sock.Receive(b);
+                WriteByeArray(b);
+
+                Console.Write("Say a thing: ");
+                sock.Send(ToByteArray(Console.ReadLine()));
+            }
 
         }
         private static void WriteByeArray(byte[] b) {
