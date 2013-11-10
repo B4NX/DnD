@@ -90,7 +90,7 @@ namespace Networking {
             }
         }
         public static void parseMessage(byte[] b) {
-            Debug.WriteLine("Well fuck you too VS");
+            Console.WriteLine(new Message(b).ToString());
         }
 
         private static void WriteByteArray(ref byte[] b) {

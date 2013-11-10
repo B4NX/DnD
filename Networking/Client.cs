@@ -56,7 +56,7 @@ namespace Networking {
                 }
                 //Receive
                 sock.Receive(readBuffer);
-                Message m = readBuffer;
+                Message m = new Message(readBuffer);
                 if (m.Header != Message.HeaderVal.EMPTY) {
                     readQueue.Enqueue(m);
                 }
