@@ -35,7 +35,16 @@ namespace Networking {
             }
             Debug.WriteLine("Connected!");
             Console.WriteLine("Connected!");
+            clients.Add("Test", client);
             return client;
+        }
+        public static void Test() {
+            Socket s = clients["Test"];
+            byte[] fubar = new byte[256];
+            while (true) {
+                s.Receive(fubar);
+                WriteByteArray(ref fubar);
+            }
         }
         public static void Talk(Socket client) {
             //Main Talk loop
@@ -44,23 +53,23 @@ namespace Networking {
                 client.Send(ToByteArray(Console.ReadLine()));
 
                 client.Receive(buffer);
-                WriteByteArray(buffer);
+                WriteByteArray(ref buffer);
             }
         }
-        private static void WriteByteArray(byte[] b) {
+        private static void WriteByteArray(ref byte[] b) {
             foreach (byte x in b) {
                 if (x != 0) {
                     Console.Write((char)x);
                 }
             }
             Console.WriteLine();
-            clearBuffer();
+            clearBuffer(ref b);
         }
         private static byte[] ToByteArray(string s) {
             return new UnicodeEncoding().GetBytes(s);
         }
-        private static void clearBuffer(){
-            buffer = new byte[256];
+        private static void clearBuffer(ref byte[] b){
+            b = new byte[b.Length];
         }
     }
 }

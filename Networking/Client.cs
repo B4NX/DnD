@@ -16,7 +16,7 @@ namespace Networking {
         private static Socket sock;
         private static byte[] buffer=new byte[256];
         public static void init() {
-            Socket sock = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+            sock = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
         }
         public static void init(IPEndPoint endPoint) {
 
