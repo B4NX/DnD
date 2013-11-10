@@ -8,12 +8,18 @@ using System.Diagnostics;
 
 namespace Networking {
     class Server {
+        /// <summary>
+        /// Represents the network service for the Server
+        /// </summary>
+        private static Socket sock;
+        public static Dictionary<string, Socket> clients = new Dictionary<string, Socket>();
         static byte[] buffer = new byte[256];
         public static void init() {
-            
-            Socket sock = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+            sock = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             IPEndPoint ep = new IPEndPoint(IPAddress.Any, 666);
-            sock.Bind(ep);
+            sock.Bind(ep);            
+        }
+        public static Socket connect() {
             sock.Listen(Int32.MaxValue);
             Debug.WriteLine("Waiting for connection");
             Socket client;
@@ -28,27 +34,20 @@ namespace Networking {
                 }
             }
             Debug.WriteLine("Connected!");
-
-            client.Receive(buffer);
-            WriteByeArray(buffer);
-            
-            Console.WriteLine("Please say something nice to your \"friend\".");
-            string s=Console.ReadLine();
-            client.Send(ToByteArray(s));
-
-            client.Receive(buffer);
-            WriteByeArray(buffer);
-
+            Console.WriteLine("Connected!");
+            return client;
+        }
+        public static void Talk(Socket client) {
+            //Main Talk loop
             while (true) {
                 Console.Write("Say thing: ");
                 client.Send(ToByteArray(Console.ReadLine()));
 
                 client.Receive(buffer);
-                WriteByeArray(buffer);
+                WriteByteArray(buffer);
             }
-            
         }
-        private static void WriteByeArray(byte[] b) {
+        private static void WriteByteArray(byte[] b) {
             foreach (byte x in b) {
                 if (x != 0) {
                     Console.Write((char)x);

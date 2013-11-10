@@ -5,15 +5,23 @@ using System.Text;
 using System.Net;
 using System.Net.Sockets;
 using System.Diagnostics;
+using System.IO;
+using System.Threading;
 
 namespace Networking {
     class Client {
+        /// <summary>
+        /// Represents the network service for the client.
+        /// </summary>
+        private static Socket sock;
         private static byte[] buffer=new byte[256];
         public static void init() {
-
             Socket sock = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+        }
+        public static void Connect(IPEndPoint endPoints) {
             IPEndPoint ep = new IPEndPoint(IPAddress.Parse("192.168.20.144"), 666);
             Debug.WriteLine("Waiting for connection");
+            //Handshake
             while (true) {
                 try {
                     sock.Connect(ep);
@@ -24,24 +32,20 @@ namespace Networking {
                 }
             }
             Debug.WriteLine("Connected!");
-            sock.Send(ToByteArray("Talk"));
-            
-            sock.Receive(buffer);
-            WriteByeArray(buffer);
-
-            Console.WriteLine("Please say something nice to your \"friend\".");
-            string s = Console.ReadLine();
-            sock.Send(ToByteArray(s));
+            Console.WriteLine("Connected!");
+        }
+        public static void talk(Socket sock) {
+            //Main Talk loop
             while (true) {
                 sock.Receive(buffer);
-                WriteByeArray(buffer);
+                WriteByteArray(buffer);
 
                 Console.Write("Say a thing: ");
                 sock.Send(ToByteArray(Console.ReadLine()));
             }
-
         }
-        private static void WriteByeArray(byte[] b) {
+
+        private static void WriteByteArray(byte[] b) {
             foreach (byte x in b) {
                 if (x != 0) {
                     Console.Write((char)x);
