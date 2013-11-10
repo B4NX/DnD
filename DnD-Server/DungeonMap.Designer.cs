@@ -28,6 +28,7 @@
             // 
             // mapPanel
             // 
+            this.mapPanel.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.mapPanel.Location = new System.Drawing.Point(0, 0);
             this.mapPanel.Name = "mapPanel";
             this.mapPanel.Size = new System.Drawing.Size(1000, 1000);
@@ -38,10 +39,10 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(386, 326);
+            this.ClientSize = new System.Drawing.Size(334, 316);
             this.ControlBox = false;
             this.Controls.Add(this.mapPanel);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "DungeonMap";

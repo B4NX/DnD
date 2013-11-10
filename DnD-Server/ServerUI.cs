@@ -19,17 +19,6 @@ namespace DnD {
 
             DungeonMap = new DungeonMap(this);
             DungeonMap.Show(this);
-
-
-            Monster dragon = new Monster("Agararhag", "Dragon", 7, 15);
-            
-            MonsterTreeNode testnode = new MonsterTreeNode(dragon);
-            monsterList.NodeMouseDoubleClick += (object sender, TreeNodeMouseClickEventArgs e) => {
-                MonsterStatsPane pane = ((MonsterTreeNode)e.Node).Monster.GetPane(this);
-                pane.Show(this);
-            };
-
-            this.monsterList.Nodes.Add(testnode);
         }
 
         private void sendMsgButton_Click(object sender, EventArgs e) {
@@ -71,6 +60,10 @@ namespace DnD {
 
         protected override void OnClosing(CancelEventArgs e) {
             base.OnClosing(e);
+        }
+
+        private void button1_Click(object sender, EventArgs e) {
+            this.DungeonMap.ResetMap();
         }
     }
 }

@@ -13,6 +13,9 @@ namespace DnD {
         ServerUI ParentUI;
 
         public object[,] Grid;
+        public const int GRIDSIZE = 20;
+
+        public Pen pen = new Pen(Color.Black);
 
         public DungeonMap(ServerUI parent) {
             InitializeComponent();
@@ -23,17 +26,38 @@ namespace DnD {
                 this.Top = ParentUI.Top + (ParentUI.Height - this.Height) / 2;
             };
 
-            mapPanel.Paint += (object sender, PaintEventArgs e) => {
-                for (int x = 0; x < Grid.GetLength(0); x++) {
-                    if (x > e.ClipRectangle.Left && x < e.ClipRectangle.Right) {
+            this.Grid = new object[100, 100];
 
-                    }
-                }
-            };
+            mapPanel.Width = GRIDSIZE * 100;
+            mapPanel.Height = GRIDSIZE * 100;
+            mapPanel.Paint += MakeGridSquares;
+
+            this.ClientSize = new Size(361, 361);
+
+            //Scroll to the middle of the map
+            using (Control c = new Control() { Parent = this, Height = 1, Top = this.ClientSize.Height / 2 + (GRIDSIZE * 50), Width = 1, Left = this.ClientSize.Width / 2 + (GRIDSIZE * 50) }) {
+                this.ScrollControlIntoView(c);
+            }
+            mapPanel.Left = -1000;
+            mapPanel.Top = -1000;
         }
 
-        public void MakeGridSquares() {
-            Grid = new object[100, 100];
+        private void MakeGridSquares(object sender, PaintEventArgs e) {
+            for (int x = 0; x < Grid.GetLength(0) * GRIDSIZE; x += GRIDSIZE) {
+                if (x >= e.ClipRectangle.Left && x <= e.ClipRectangle.Right) {
+                    e.Graphics.DrawLine(pen, new Point(x, e.ClipRectangle.Top), new Point(x, e.ClipRectangle.Bottom));
+                }
+            } 
+            for (int y = 0; y < Grid.GetLength(1) * GRIDSIZE; y += GRIDSIZE) {
+                if (y >= e.ClipRectangle.Top && y <= e.ClipRectangle.Bottom) {
+                    e.Graphics.DrawLine(pen, new Point(e.ClipRectangle.Left, y), new Point(e.ClipRectangle.Right, y));
+                }
+            }
+        }
+
+        public void ResetMap() {
+            this.Grid = new object[100, 100];
+
         }
     }
 }

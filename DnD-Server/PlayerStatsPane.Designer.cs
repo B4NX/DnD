@@ -50,7 +50,7 @@
             this.label8 = new System.Windows.Forms.Label();
             this.stats = new System.Windows.Forms.GroupBox();
             this.label19 = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
+            this.spd = new System.Windows.Forms.Label();
             this.invButton = new System.Windows.Forms.Button();
             this.skillsbtn = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
@@ -338,7 +338,7 @@
             // stats
             // 
             this.stats.Controls.Add(this.label19);
-            this.stats.Controls.Add(this.label13);
+            this.stats.Controls.Add(this.spd);
             this.stats.Controls.Add(this.invButton);
             this.stats.Controls.Add(this.skillsbtn);
             this.stats.Controls.Add(this.groupBox2);
@@ -371,14 +371,14 @@
             this.label19.TabIndex = 6;
             this.label19.Text = "0";
             // 
-            // label13
+            // spd
             // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(119, 148);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(29, 13);
-            this.label13.TabIndex = 6;
-            this.label13.Text = "Spd:";
+            this.spd.AutoSize = true;
+            this.spd.Location = new System.Drawing.Point(119, 148);
+            this.spd.Name = "spd";
+            this.spd.Size = new System.Drawing.Size(29, 13);
+            this.spd.TabIndex = 6;
+            this.spd.Text = "Spd:";
             // 
             // invButton
             // 
@@ -645,7 +645,7 @@
         private System.Windows.Forms.Label ap;
         private System.Windows.Forms.Button skillsbtn;
         private System.Windows.Forms.Button invButton;
-        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label spd;
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.GroupBox dicebox;
         private System.Windows.Forms.PictureBox d4;
