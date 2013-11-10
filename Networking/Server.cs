@@ -44,9 +44,11 @@ namespace Networking {
             while (true) {
                 s.Receive(fubar);
                 SendToAll(fubar);
+
                 WriteByteArray(ref fubar);
+
                 Console.Write("Type something: ");
-                s.Send(ToByteArray(Console.ReadLine()));
+                SendToAll(ToByteArray(Console.ReadLine()));
             }
         }
         public static void SendToAll(byte[] b) {

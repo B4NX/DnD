@@ -46,7 +46,8 @@ namespace Networking {
         private static byte[] readBuffer=new byte[256];
         public static bool hasData = false;
         public static void Update() {
-            if (writeQueue.Count == 0) {
+            if (writeQueue.Count != 0) {
+                System.Diagnostics.Debug.WriteLine("x");
                 sock.Send(writeQueue.Dequeue());
             }
             sock.Receive(readBuffer);
