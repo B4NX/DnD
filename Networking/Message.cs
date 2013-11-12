@@ -34,6 +34,8 @@ namespace Networking {
         //   - Is this adding an NPC, or changing an NPC's stat? See monster. Also need to figure
         //       out how NPCs will figure into what we have, as it might be odd to list them in the
         //      "Monster" section...
+        //Thinking about how to implement all this, perhaps have a bunch of subclasses of Message?
+        //The header should allow the recipient to recreate it on the receiving end.
 
         private byte[] mssg = new byte[256];
         public enum Head {
