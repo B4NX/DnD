@@ -12,7 +12,7 @@ namespace DnD {
         static void Main() {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new ServerUI());
+            Application.Run(new ServerConnectUI());
         }
     }
 }

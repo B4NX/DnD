@@ -17,9 +17,9 @@ namespace Networking {
         static byte[] buffer = new byte[256];
         public static Thread updateThread;
 
-        public static void init() {
+        public static void init(int port = 666) {
             sock = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-            IPEndPoint ep = new IPEndPoint(IPAddress.Any, 666);
+            IPEndPoint ep = new IPEndPoint(IPAddress.Any, port);
             sock.Bind(ep);
         }
 

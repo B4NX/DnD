@@ -13,8 +13,6 @@ namespace DnD {
     public partial class ServerUI : MainUI {
         public ServerUI() {
             InitializeComponent();
-            Networking.Server.init();
-            Networking.Server.Connect();
 
             DungeonMap = new ServerMap(this);
             DungeonMap.Show(this);

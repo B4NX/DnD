@@ -54,6 +54,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ServerConnectUI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ServerConnectUI.Designer.cs">
+      <DependentUpon>ServerConnectUI.cs</DependentUpon>
+    </Compile>
     <Compile Include="ServerMap.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -78,6 +84,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="ServerConnectUI.resx">
+      <DependentUpon>ServerConnectUI.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ServerMap.resx">
       <DependentUpon>ServerMap.cs</DependentUpon>
     </EmbeddedResource>
