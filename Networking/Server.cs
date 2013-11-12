@@ -16,13 +16,14 @@ namespace Networking {
         public static Dictionary<string, Socket> clients = new Dictionary<string, Socket>();
         static byte[] buffer = new byte[256];
         public static Thread updateThread;
+
         public static void init() {
             sock = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             IPEndPoint ep = new IPEndPoint(IPAddress.Any, 666);
             sock.Bind(ep);
         }
 
-        public static Socket connect() {
+        public static Socket Connect() {
             sock.Listen(Int32.MaxValue);
             Debug.WriteLine("Waiting for connection");
             Socket client;
@@ -54,22 +55,35 @@ namespace Networking {
         public static Queue<Message> writeQueue = new Queue<Message>();
         public static void Update() {//r-s
             while (clients.Count!=0) {
-                try {
+                try
+                {
                     //Recieve
-                    foreach (KeyValuePair<string, Socket> kvp in clients) {
+                    foreach (KeyValuePair<string, Socket> kvp in clients)
+                    {
                         byte[] tempRead = new byte[256];
                         kvp.Value.Receive(tempRead);
-                        if (tempRead[0] != (byte)Message.Head.EMPTY) {
+                        if (tempRead[0] != (byte)Message.Head.EMPTY)
+                        {
                             parseMessage(tempRead);
                         }
                     }
                     //Send
-                    if (writeQueue.Count != 0) {
+                    if (writeQueue.Count != 0)
+                    {
                         SendToAll(writeQueue.Dequeue().GetMessage);
-                    } else if (writeQueue.Count == 0) {
+                    }
+                    else if (writeQueue.Count == 0)
+                    {
                         SendToAll(new Message(Message.Head.EMPTY).GetMessage);
                     }
-                } catch (SocketException e) {
+                }
+                catch (SocketException e)
+                {
+                    Debug.WriteLine(e);
+                    Close();
+                }
+                catch (InvalidOperationException e)
+                {
                     Debug.WriteLine(e);
                     Close();
                 }

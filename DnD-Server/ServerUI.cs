@@ -14,7 +14,7 @@ namespace DnD {
         public ServerUI() {
             InitializeComponent();
             Networking.Server.init();
-            Networking.Server.connect();
+            Networking.Server.Connect();
 
             DungeonMap = new ServerMap(this);
             DungeonMap.Show(this);
