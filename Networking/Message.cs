@@ -5,6 +5,36 @@ using System.Text;
 
 namespace Networking {
     public class Message {
+
+        //Some thoughts about formats...
+        //STAT:
+        //  First section: whose stat (player ID - one byte)
+        //  Second section: what stat (we'll need an enum or array of stat IDs
+        //     - if we want to make DMs able to define stats on the fly, 
+        //        we should make it dynamic
+        //  Third section: value (could this ever be string? or just int16?)
+        //LOG:
+        //   - Perhaps split into LOG and CHAT to differentiate between game output
+        //     and messages from players/DM?
+        //  First section: player name, alias, DM, or monster (whatever goes in [])
+        //  Second section: chat message
+        //FULL:
+        //   - Dafuq is this for?
+        //MONSTER:
+        //   - Is this adding a monster, or changing a monster's stat? If the former,
+        //      we'll need to allow monster IDs in the STAT message
+        //MAP:
+        //  First section: type of map revision (tile update, map reset, movement, etc) - ENUM
+        //       - This may change a bit as the map changes formats - I need to diferentiate
+        //          between the base map and things that are on the map (so you can have partially
+        //          filled tiles)
+        //  Second section: coordinates of revision (1 byte each, map is 100x100 
+        //      so each coord can fit in a byte)
+        //NPC:
+        //   - Is this adding an NPC, or changing an NPC's stat? See monster. Also need to figure
+        //       out how NPCs will figure into what we have, as it might be odd to list them in the
+        //      "Monster" section...
+
         private byte[] mssg = new byte[256];
         public enum Head {
             EMPTY,

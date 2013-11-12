@@ -24,7 +24,7 @@ namespace DnD
             BackgroundWorker serverconnection = new BackgroundWorker();
             serverconnection.DoWork += (object sender2, DoWorkEventArgs e2) => {
                 status.Text = "Waiting for connection...";
-                status.Refresh();
+                status.Refresh();   
                 Networking.Server.Connect();
                 status.Text = "Connected!";
             };
