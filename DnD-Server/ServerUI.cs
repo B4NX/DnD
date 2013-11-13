@@ -18,6 +18,7 @@ namespace DnD {
             DungeonMap.Show(this);
 
             Thread update = new Thread(LogUpdate);
+            update.Name = "Server Update";
             update.Start();
             Application.Idle += Application_Idle;
         }
@@ -31,6 +32,7 @@ namespace DnD {
             msg = "[" + sender + "]: " + msg + Environment.NewLine;
             adventureLog += msg;
             adventureLogBox.Text += msg;
+            Console.WriteLine(msg);
             Networking.Server.SendToAll(Networking.Message.ToByteArray(msg));
         }
 

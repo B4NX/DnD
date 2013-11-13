@@ -8,11 +8,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("DnD-Fancy")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("
-			")]
+[assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("DnD-Fancy")]
-[assembly: AssemblyCopyright("Copyright © 
-			 2013")]
+[assembly: AssemblyCopyright("Copyright ©2013")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

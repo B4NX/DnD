@@ -38,12 +38,13 @@ namespace Networking {
                 }
             }
             Debug.WriteLine("Connected!");
-            Console.WriteLine("Connected!");
+            //Console.WriteLine("Connected!");
             clients.Add("Test", client);
 
             //ClientConnected.BeginInvoke(client, new EventArgs(), null, null);
 
             updateThread = new Thread(Update);
+            updateThread.Name = "Network-S Update";
             updateThread.Start();
             return client;
         }

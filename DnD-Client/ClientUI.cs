@@ -23,6 +23,7 @@ namespace DnD
             DungeonMap.Show(this);
             //Client.init(new System.Net.IPEndPoint(System.Net.IPAddress.Parse("192.168.20.144"),666));
             Thread update = new Thread(LogUpdate);
+            update.Name = "Client Update";
             update.Start();
             Application.Idle += Application_Idle;
         }

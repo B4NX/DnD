@@ -26,7 +26,7 @@ namespace Networking {
         public static void init(IPEndPoint endPoint) {
             sock = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             Connect(endPoint);
-        }        
+        }
         public static void Connect(IPEndPoint endPoint) {
             Debug.WriteLine("Waiting for connection");
             //Handshake
