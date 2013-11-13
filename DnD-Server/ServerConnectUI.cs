@@ -21,15 +21,7 @@ namespace DnD
             status.Text = "Starting server...";
             Networking.Server.init(Int16.Parse(portBox.Text));
             System.Diagnostics.Debug.WriteLine("Server initialized.");
-            BackgroundWorker serverconnection = new BackgroundWorker();
-            serverconnection.DoWork += (object sender2, DoWorkEventArgs e2) => {
-                status.Text = "Waiting for connection...";
-                status.Refresh();   
-                Networking.Server.Connect();
-                status.Text = "Connected!";
-            };
-            serverconnection.RunWorkerAsync();
-
+            Networking.Server.Connect();
             ServerUI win = new ServerUI();
             win.Show(this);
         }
