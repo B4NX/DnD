@@ -40,6 +40,8 @@ namespace Networking {
         //      "Monster" section...
         //   - For adding an NPC, you rarely need to change an NPC's stats, infact, stat changes should
         //      just use the same method as player stat changes
+        //Hash:
+        //   - Hash of the player's client for anti-hack
         //Thinking about how to implement all this, perhaps have a bunch of subclasses of Message?
         //The header should allow the recipient to recreate it on the receiving end.
 
