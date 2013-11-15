@@ -8,12 +8,13 @@ using System.Diagnostics;
 using System.Threading;
 
 namespace Networking {
-    public class Server {
+    public class ServerNS {
         /// <summary>
         /// Represents the network service for the Server
         /// </summary>
         private static Socket sock;
         public static Dictionary<string, Socket> clients = new Dictionary<string, Socket>();
+        private static NetworkStream ns;
         static byte[] buffer = new byte[256];
         public static Thread updateThread;
 
@@ -31,6 +32,7 @@ namespace Networking {
             while (true) {
                 try {
                     client = sock.Accept();
+                    ns = new NetworkStream(client);
                     break;
                 } catch (SocketException e) {
                     Debug.WriteLine(e.Message);
@@ -55,36 +57,26 @@ namespace Networking {
         }
         public static Queue<Message> writeQueue = new Queue<Message>();
         public static void Update() {//r-s
-            while (clients.Count!=0) {
-                try
-                {
+            while (clients.Count != 0) {
+                try {
                     //Recieve
-                    foreach (KeyValuePair<string, Socket> kvp in clients)
-                    {
+                    foreach (KeyValuePair<string, Socket> kvp in clients) {
                         byte[] tempRead = new byte[256];
                         kvp.Value.Receive(tempRead);
-                        if (tempRead[0] != (byte)Message.Head.EMPTY)
-                        {
+                        if (tempRead[0] != (byte)Message.Head.EMPTY) {
                             parseMessage(tempRead);
                         }
                     }
                     //Send
-                    if (writeQueue.Count != 0)
-                    {
+                    if (writeQueue.Count != 0) {
                         SendToAll(writeQueue.Dequeue().GetMessage);
-                    }
-                    else if (writeQueue.Count == 0)
-                    {
+                    } else if (writeQueue.Count == 0) {
                         SendToAll(new Message(Message.Head.EMPTY).GetMessage);
                     }
-                }
-                catch (SocketException e)
-                {
+                } catch (SocketException e) {
                     Debug.WriteLine(e);
                     Close();
-                }
-                catch (InvalidOperationException e)
-                {
+                } catch (InvalidOperationException e) {
                     Debug.WriteLine(e);
                     Close();
                 }
@@ -97,22 +89,12 @@ namespace Networking {
         }
         public static void Close() {
             List<string> toRemove = new List<string>();
-            foreach (KeyValuePair<string,Socket> kvp in clients){
+            foreach (KeyValuePair<string, Socket> kvp in clients) {
                 kvp.Value.Close();
                 toRemove.Add(kvp.Key);
             }
             foreach (string s in toRemove) {
                 clients.Remove(s);
-            }
-        }
-
-        public static List<string> allConnected {
-            get {
-                List<string> c=new List<string>();
-                foreach (KeyValuePair<string, Socket> kvp in clients) {
-                    c.Add(kvp.Key);
-                }
-                return c;
             }
         }
     }

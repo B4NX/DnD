@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 
 namespace Networking {
+    [Serializable]
     public class Message {
 
         //Some thoughts about formats...
