@@ -37,12 +37,21 @@ namespace DnD {
         }
 
         private void Application_Idle(object sender, EventArgs e) {
+            //Donaudampfschiffahrtsgesellschaft();
             if (readUIQueue.Count > 0) {
                 string msg = readUIQueue.Dequeue();
                 //Debug.WriteLine("something on the queue (len " + readUIQueue.Count + ")! it's " + msg);
                 adventureLog += msg;
                 adventureLogBox.Text += msg;
                 Networking.Server.SendToAll(Networking.Message.getLogMessage(msg).GetMessage);
+            }
+        }
+        private void Donaudampfschiffahrtsgesellschaft() {
+            foreach (string names in Server.allConnected) {
+                //playerList += ""+names + Environment.NewLine;
+                if (!this.playerList.Nodes.Contains(new TreeNode(names))){
+                    this.playerList.Nodes.Add(names);
+                }
             }
         }
 
