@@ -5,7 +5,7 @@ using System.Windows.Forms;
 using OpenTK;
 using SharpGLass;
 
-namespace DnD_Fancy
+namespace DnD
 {
     static class Program
     {
@@ -15,7 +15,9 @@ namespace DnD_Fancy
         [STAThread]
         static void Main()
         {
-            Engine Game = new Engine();
+            Engine Game = new Engine(new ServerUI());
+            Console.WriteLine(GV.Engine);
+            Game.Run();
         }
     }
 }
