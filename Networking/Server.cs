@@ -17,6 +17,8 @@ namespace Networking {
         static byte[] buffer = new byte[256];
         public static Thread updateThread;
 
+        private static NetworkStream ns;
+
         public static void init(int port = 666) {
             sock = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             IPEndPoint ep = new IPEndPoint(IPAddress.Any, port);
@@ -37,6 +39,7 @@ namespace Networking {
                     continue;
                 }
             }
+            ns = new NetworkStream(sock);
             Debug.WriteLine("Connected!");
             //Console.WriteLine("Connected!");
             clients.Add("Test", client);

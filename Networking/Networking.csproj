@@ -46,7 +46,7 @@
   <ItemGroup>
     <Compile Include="Client.cs" />
     <Compile Include="ClientNS.cs" />
-    <Compile Include="Errors\InvalidMessage.cs" />
+    <Compile Include="Errors\InvalidMessageException.cs" />
     <Compile Include="Errors\WTFDidYouDoAndyException.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="Message.cs" />
