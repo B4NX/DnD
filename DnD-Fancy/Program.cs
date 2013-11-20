@@ -15,7 +15,7 @@ namespace DnD
         [STAThread]
         static void Main()
         {
-            Engine Game = new Engine(new ServerUI());
+            Engine Game = new Engine(new ServerConnectUI());
             Console.WriteLine(GV.Engine);
             Game.Run();
         }
