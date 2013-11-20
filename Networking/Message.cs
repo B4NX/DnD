@@ -98,5 +98,11 @@ namespace Networking {
                 return this.mssg;
             }
         }
+
+        public static Type Type {
+            get {
+                return new Message(Head.EMPTY).GetType();
+            }
+        }
     }
 }

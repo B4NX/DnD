@@ -6,6 +6,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Diagnostics;
 using System.Threading;
+using System.Runtime.Serialization.Formatters.Binary;
 
 namespace Networking {
     public class Server {
@@ -16,6 +17,7 @@ namespace Networking {
         public static Dictionary<string, Socket> clients = new Dictionary<string, Socket>();
         static byte[] buffer = new byte[256];
         public static Thread updateThread;
+        private static BinaryFormatter serializer = new BinaryFormatter();
 
         private static NetworkStream ns;
 
@@ -33,13 +35,14 @@ namespace Networking {
             while (true) {
                 try {
                     client = sock.Accept();
+                    //Console.WriteLine(sock.Connected);
+                    ns = new NetworkStream(sock);
                     break;
                 } catch (SocketException e) {
                     Debug.WriteLine(e.Message);
                     continue;
                 }
             }
-            ns = new NetworkStream(sock);
             Debug.WriteLine("Connected!");
             //Console.WriteLine("Connected!");
             clients.Add("Test", client);
@@ -57,6 +60,7 @@ namespace Networking {
             }
         }
         public static Queue<Message> writeQueue = new Queue<Message>();
+        public static Queue<Message> nsQueue = new Queue<Message>();
         public static void Update() {//r-s
             while (clients.Count!=0) {
                 try
@@ -66,15 +70,19 @@ namespace Networking {
                     {
                         byte[] tempRead = new byte[256];
                         kvp.Value.Receive(tempRead);
+
                         if (tempRead[0] != (byte)Message.Head.EMPTY)
                         {
+                            //nsQueue.Enqueue((Message)serializer.Deserialize(ns));
                             parseMessage(tempRead);
                         }
                     }
                     //Send
                     if (writeQueue.Count != 0)
                     {
+                        byte[] m=writeQueue.Dequeue().GetMessage;
                         SendToAll(writeQueue.Dequeue().GetMessage);
+                        //serializer.Serialize(ns,m);
                     }
                     else if (writeQueue.Count == 0)
                     {
