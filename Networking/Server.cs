@@ -36,7 +36,7 @@ namespace Networking {
                 try {
                     client = sock.Accept();
                     //Console.WriteLine(sock.Connected);
-                    ns = new NetworkStream(sock);
+                    ns = new NetworkStream(client);
                     break;
                 } catch (SocketException e) {
                     Debug.WriteLine(e.Message);
@@ -73,7 +73,7 @@ namespace Networking {
 
                         if (tempRead[0] != (byte)Message.Head.EMPTY)
                         {
-                            //nsQueue.Enqueue((Message)serializer.Deserialize(ns));
+                            nsQueue.Enqueue((Message)serializer.Deserialize(ns));
                             parseMessage(tempRead);
                         }
                     }
@@ -82,7 +82,7 @@ namespace Networking {
                     {
                         byte[] m=writeQueue.Dequeue().GetMessage;
                         SendToAll(writeQueue.Dequeue().GetMessage);
-                        //serializer.Serialize(ns,m);
+                        serializer.Serialize(ns, m);
                     }
                     else if (writeQueue.Count == 0)
                     {
