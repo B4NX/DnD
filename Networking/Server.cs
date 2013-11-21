@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.Diagnostics;
 using System.Net;
 using System.Net.Sockets;
-using System.Diagnostics;
-using System.Threading;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.Threading;
+using System.Runtime.Serialization;
 
 namespace Networking {
     public class Server {
@@ -63,41 +62,35 @@ namespace Networking {
         public static Queue<Message> nsQueue = new Queue<Message>();
         public static void Update() {//r-s
             while (clients.Count!=0) {
-                try
-                {
+                try {
                     //Recieve
-                    foreach (KeyValuePair<string, Socket> kvp in clients)
-                    {
+                    foreach (KeyValuePair<string, Socket> kvp in clients) {
                         byte[] tempRead = new byte[256];
                         kvp.Value.Receive(tempRead);
 
-                        if (tempRead[0] != (byte)Message.Head.EMPTY)
-                        {
+                        if (tempRead[0] != (byte)Message.Head.EMPTY) {
                             nsQueue.Enqueue((Message)serializer.Deserialize(ns));
-                            parseMessage(tempRead);
+                            //parseMessage(tempRead);
+                            Console.WriteLine();
                         }
                     }
                     //Send
-                    if (writeQueue.Count != 0)
-                    {
-                        byte[] m=writeQueue.Dequeue().GetMessage;
-                        SendToAll(writeQueue.Dequeue().GetMessage);
-                        serializer.Serialize(ns, m);
+                    if (writeQueue.Count != 0) {
+                        Message m = writeQueue.Dequeue();
+                        //SendToAll(writeQueue.Dequeue().GetMessage);
+                        serializer.Serialize(ns, m, null);
+                    } else if (writeQueue.Count == 0) {
+                        //SendToAll(new Message(Message.Head.EMPTY).GetMessage);
+                        serializer.Serialize(ns, new Message(Message.Head.EMPTY), null);
                     }
-                    else if (writeQueue.Count == 0)
-                    {
-                        SendToAll(new Message(Message.Head.EMPTY).GetMessage);
-                    }
-                }
-                catch (SocketException e)
-                {
+                } catch (SocketException e) {
                     Debug.WriteLine(e);
                     Close();
-                }
-                catch (InvalidOperationException e)
-                {
+                } catch (InvalidOperationException e) {
                     Debug.WriteLine(e);
                     Close();
+                } catch (SerializationException e) {
+                    Debug.WriteLine(e);
                 }
             }
         }

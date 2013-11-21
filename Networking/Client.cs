@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
+using System.Diagnostics;
 using System.Net;
 using System.Net.Sockets;
-using System.Diagnostics;
-using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Threading;
+using System.Runtime.Remoting.Messaging;
 
 namespace Networking {
     public class Client {
@@ -21,6 +19,7 @@ namespace Networking {
         public static Queue<Message> readQueue = new Queue<Message>();
 
         private static NetworkStream ns;
+        private static BinaryFormatter serializer = new BinaryFormatter();
         
         public static void init() {
             sock = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
@@ -47,21 +46,28 @@ namespace Networking {
             updateThread.Name = "Network-C-Update";
             updateThread.Start();
         }
+
         private static byte[] readBuffer=new byte[256];
+        private static Queue<Message> nsQueue = new Queue<Message>();
         public static void Update() {
             bool hasSocket = true;
             while (hasSocket) {
                 //Send
                 try {
                     if (writeQueue.Count != 0) {
-                        sock.Send(writeQueue.Dequeue().GetMessage);
+                        Message message=writeQueue.Dequeue();
+                        //sock.Send(message.GetMessage);
+                        serializer.Serialize(ns,message,null);
+                        
                     }
                     else if (writeQueue.Count == 0) {
-                        sock.Send(new Message(Message.Head.EMPTY).GetMessage);
+                        //sock.Send(new Message(Message.Head.EMPTY).GetMessage);
+                        serializer.Serialize(ns, new Message(Message.Head.EMPTY),null);
                     }
                     //Receive
-                    sock.Receive(readBuffer);
-                    Message m = new Message((Message.Head)readBuffer[0], readBuffer);
+                    //sock.Receive(readBuffer);
+                    //Message m = new Message((Message.Head)readBuffer[0], readBuffer);
+                    Message m=(Message)serializer.Deserialize(ns);
                     if (m.Header != Message.Head.EMPTY) {
                         readQueue.Enqueue(m);
                     }
