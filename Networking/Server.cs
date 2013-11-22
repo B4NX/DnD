@@ -8,6 +8,7 @@ using System.Threading;
 using System.Runtime.Serialization;
 
 namespace Networking {
+    [Obsolete("Use ServerNS")]
     public class Server {
         /// <summary>
         /// Represents the network service for the Server
@@ -74,6 +75,7 @@ namespace Networking {
                             Console.WriteLine();
                         }
                     }
+                    //ns.flsu
                     //Send
                     if (writeQueue.Count != 0) {
                         Message m = writeQueue.Dequeue();
