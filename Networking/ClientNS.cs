@@ -16,7 +16,7 @@ namespace Networking {
         /// </summary>
         private static Socket sock;
         private static NetworkStream ns;
-        private static BinaryFormatter serializer;
+        private static BinaryFormatter serializer = new BinaryFormatter();
         //private static byte[] buffer = new byte[256];
         public static Thread updateThread;
 

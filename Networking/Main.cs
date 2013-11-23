@@ -10,12 +10,12 @@ namespace Networking {
             string ans=Console.ReadLine();
             if (ans.ToUpper() == "S") {
                 Console.WriteLine("Server");
-                Server.init();
-                Server.Connect();
+                ServerNS.init();
+                ServerNS.Connect();
                 //Server.Test();
             } else if (ans.ToUpper() == "C") {
                 Console.WriteLine("Client");
-                Client.init();
+                ClientNS.init();
             }
         }
     }

@@ -113,5 +113,14 @@ namespace Networking {
                 clients.Remove(s);
             }
         }
+        public static List<string> allConnected {
+            get {
+                List<string> c = new List<string>();
+                foreach (KeyValuePair<string, NetworkStream> kvp in clients) {
+                    c.Add(kvp.Key);
+                }
+                return c;
+            }
+        }
     }
 }

@@ -48,8 +48,8 @@ namespace DnD
             //append DM prefix and newline, then log it to the main string and textbox.
             msg = "[" + sender + "]: " + msg + Environment.NewLine;
             //Now send msg on to the server
-            Client.writeQueue.Enqueue(Networking.Message.getLogMessage(msg));
-            Debug.WriteLine(Client.writeQueue.Count);
+            ClientNS.writeQueue.Enqueue(Networking.Message.getLogMessage(msg));
+            Debug.WriteLine(ClientNS.writeQueue.Count);
         }
         public void LogUpdate() {
             while (true) {
@@ -58,15 +58,15 @@ namespace DnD
         }
         private static Queue<string> readUIQueue = new Queue<string>();
         private void logClientAdventure() {
-            if (Client.readQueue.Count != 0) {
-                Networking.Message m=Client.readQueue.Dequeue();
+            if (ClientNS.readQueue.Count != 0) {
+                Networking.Message m=ClientNS.readQueue.Dequeue();
                 Debug.WriteLine("Received message from server: " + m.ToString() + Environment.NewLine);
                 readUIQueue.Enqueue(m.ToString());
             }
         }
 
         private void ClientUI_FormClosed(object sender, FormClosedEventArgs e) {
-            Client.Close();
+            ClientNS.Close();
         }
 
     }

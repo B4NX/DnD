@@ -19,9 +19,9 @@ namespace DnD
         private void connectBtn_Click(object sender, EventArgs e)
         {
             status.Text = "Starting server...";
-            Networking.Server.init(Int16.Parse(portBox.Text));
+            Networking.ServerNS.init(Int16.Parse(portBox.Text));
             System.Diagnostics.Debug.WriteLine("Server initialized.");
-            Networking.Server.Connect();
+            Networking.ServerNS.Connect();
             ServerUI win = new ServerUI();
             win.Show(this);
         }
