@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Net;
 using System.Net.Sockets;
@@ -7,6 +8,7 @@ using System.Threading;
 using System.Runtime.Remoting.Messaging;
 
 namespace Networking {
+    [Obsolete("Use ServerNS")]
     public class Client {
         /// <summary>
         /// Represents the network service for the client.

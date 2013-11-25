@@ -6,32 +6,36 @@ using System.Net;
 using System.Net.Sockets;
 using System.Diagnostics;
 using System.Threading;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.Runtime.Remoting.Messaging;
 
 namespace Networking {
     public class ServerNS {
         /// <summary>
         /// Represents the network service for the Server
         /// </summary>
-        private static Socket sock;
-        public static Dictionary<string, Socket> clients = new Dictionary<string, Socket>();
+        private static Socket localSock;
+        public static Dictionary<string, NetworkStream> clients = new Dictionary<string, NetworkStream>();
         private static NetworkStream ns;
         static byte[] buffer = new byte[256];
         public static Thread updateThread;
 
+        private static BinaryFormatter serializer = new BinaryFormatter();
+
         public static void init(int port = 666) {
-            sock = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+            localSock = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             IPEndPoint ep = new IPEndPoint(IPAddress.Any, port);
-            sock.Bind(ep);
+            localSock.Bind(ep);
         }
 
         public static Socket Connect() {
-            sock.Listen(Int32.MaxValue);
+            localSock.Listen(Int32.MaxValue);
             Debug.WriteLine("Waiting for connection");
             Socket client;
             //Handshake
             while (true) {
                 try {
-                    client = sock.Accept();
+                    client = localSock.Accept();
                     ns = new NetworkStream(client);
                     break;
                 } catch (SocketException e) {
@@ -41,7 +45,7 @@ namespace Networking {
             }
             Debug.WriteLine("Connected!");
             //Console.WriteLine("Connected!");
-            clients.Add("Test", client);
+            clients.Add("Test", new NetworkStream(client));
 
             //ClientConnected.BeginInvoke(client, new EventArgs(), null, null);
 
@@ -50,9 +54,15 @@ namespace Networking {
             updateThread.Start();
             return client;
         }
-        public static void SendToAll(byte[] b) {
-            foreach (KeyValuePair<string, Socket> kvp in clients) {
-                kvp.Value.Send(b);
+        [Obsolete("This method is obsolete, please SendToAll(Message m)")]
+        public static void SendToAll(byte[] b,Header[] head=null) {
+            foreach (KeyValuePair<string, NetworkStream> kvp in clients) {
+                serializer.Serialize(kvp.Value,b,head);
+            }
+        }
+        public static void SendToAll(Message m,Header[] head=null) {
+            foreach (KeyValuePair<string, NetworkStream> kvp in clients) {
+                serializer.Serialize(kvp.Value, m,head);
             }
         }
         public static Queue<Message> writeQueue = new Queue<Message>();
@@ -60,18 +70,18 @@ namespace Networking {
             while (clients.Count != 0) {
                 try {
                     //Recieve
-                    foreach (KeyValuePair<string, Socket> kvp in clients) {
-                        byte[] tempRead = new byte[256];
-                        kvp.Value.Receive(tempRead);
-                        if (tempRead[0] != (byte)Message.Head.EMPTY) {
-                            parseMessage(tempRead);
+                    foreach (KeyValuePair<string, NetworkStream> kvp in clients) {
+                        Message m;
+                        m=(Message)serializer.Deserialize(ns);
+                        if (m.Header != Message.Head.EMPTY) {
+                            parseMessage(m);
                         }
                     }
                     //Send
                     if (writeQueue.Count != 0) {
-                        SendToAll(writeQueue.Dequeue().GetMessage);
+                        SendToAll(writeQueue.Dequeue());
                     } else if (writeQueue.Count == 0) {
-                        SendToAll(new Message(Message.Head.EMPTY).GetMessage);
+                        SendToAll(new Message(Message.Head.EMPTY));
                     }
                 } catch (SocketException e) {
                     Debug.WriteLine(e);
@@ -83,18 +93,33 @@ namespace Networking {
             }
         }
         public static Queue<Message> readQueue = new Queue<Message>();
+
+        [Obsolete("Pass a Message instead")]
         public static void parseMessage(byte[] b) {
             Console.WriteLine(new Message(Message.Head.LOG, b).ToString());
             readQueue.Enqueue(new Message((Message.Head)b[0], b));
         }
+        public static void parseMessage(Message m) {
+            Console.WriteLine(m.ToString());
+            readQueue.Enqueue(m);
+        }
         public static void Close() {
             List<string> toRemove = new List<string>();
-            foreach (KeyValuePair<string, Socket> kvp in clients) {
+            foreach (KeyValuePair<string, NetworkStream> kvp in clients) {
                 kvp.Value.Close();
                 toRemove.Add(kvp.Key);
             }
             foreach (string s in toRemove) {
                 clients.Remove(s);
+            }
+        }
+        public static List<string> allConnected {
+            get {
+                List<string> c = new List<string>();
+                foreach (KeyValuePair<string, NetworkStream> kvp in clients) {
+                    c.Add(kvp.Key);
+                }
+                return c;
             }
         }
     }

@@ -33,7 +33,7 @@ namespace DnD {
             adventureLog += msg;
             adventureLogBox.Text += msg;
             Console.WriteLine(msg);
-            Networking.Server.SendToAll(Networking.Message.ToByteArray(msg));
+            Networking.ServerNS.SendToAll(new Networking.Message(Networking.Message.Head.LOG, msg));
         }
 
         private void Application_Idle(object sender, EventArgs e) {
@@ -43,11 +43,11 @@ namespace DnD {
                 //Debug.WriteLine("something on the queue (len " + readUIQueue.Count + ")! it's " + msg);
                 adventureLog += msg;
                 adventureLogBox.Text += msg;
-                Networking.Server.SendToAll(Networking.Message.getLogMessage(msg).GetMessage);
+                Networking.ServerNS.SendToAll(Networking.Message.getLogMessage(msg));
             }
         }
         private void Donaudampfschiffahrtsgesellschaft() {
-            foreach (string names in Server.allConnected) {
+            foreach (string names in ServerNS.allConnected) {
                 //playerList += ""+names + Environment.NewLine;
                 if (!this.playerList.Nodes.Contains(new TreeNode(names))){
                     this.playerList.Nodes.Add(names);
@@ -81,15 +81,15 @@ namespace DnD {
 
         private static Queue<string> readUIQueue = new Queue<string>();
         private void logServerAdventure() {
-            if (Server.readQueue.Count != 0) {
-                Networking.Message m = Server.readQueue.Dequeue();
+            if (ServerNS.readQueue.Count != 0) {
+                Networking.Message m = ServerNS.readQueue.Dequeue();
                 //Debug.WriteLine("Recevied message from server: " + m.ToString());
                 readUIQueue.Enqueue(m.ToString());
             }
         }
 
         private void ServerUI_FormClosed(object sender, FormClosedEventArgs e) {
-            Server.Close();
+            ServerNS.Close();
             Environment.Exit(0);
         }
     }

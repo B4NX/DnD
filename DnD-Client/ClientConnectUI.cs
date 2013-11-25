@@ -16,7 +16,7 @@ namespace DnD {
         }
 
         private void connectBtn_Click(object sender, EventArgs e) {
-            Client.init(new IPEndPoint(IPAddress.Parse(ipBox.Text), 666));
+            ClientNS.init(new IPEndPoint(IPAddress.Parse(ipBox.Text), 666));
             ClientUI win = new ClientUI();
             win.Show(this);
         }

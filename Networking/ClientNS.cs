@@ -16,15 +16,15 @@ namespace Networking {
         /// </summary>
         private static Socket sock;
         private static NetworkStream ns;
-        private static BinaryFormatter binaryFormat;
-        private static byte[] buffer = new byte[256];
+        private static BinaryFormatter serializer = new BinaryFormatter();
+        //private static byte[] buffer = new byte[256];
         public static Thread updateThread;
 
         public static Queue<Message> writeQueue = new Queue<Message>();
         public static Queue<Message> readQueue = new Queue<Message>();
 
         public static void init() {
-            binaryFormat = new BinaryFormatter();
+            serializer = new BinaryFormatter();
             sock = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
         }
         public static void init(IPEndPoint endPoint) {
@@ -57,17 +57,10 @@ namespace Networking {
                 try {
                     if (writeQueue.Count != 0) {
                         Message sm = writeQueue.Dequeue();
-                        binaryFormat.Serialize(ns, sm);
-                        
-                        Console.Write("");
-                        sock.Send(sm.GetMessage);
-                    } else if (writeQueue.Count == 0) {
-                        sock.Send(new Message(Message.Head.EMPTY).GetMessage);
+                        serializer.Serialize(ns, sm);
                     }
-
                     //Receive
-                    sock.Receive(readBuffer);
-                    Message m = new Message((Message.Head)readBuffer[0], readBuffer);
+                    Message m = (Message)serializer.Deserialize(ns);
                     if (m.Header != Message.Head.EMPTY) {
                         readQueue.Enqueue(m);
                     }
