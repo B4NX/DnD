@@ -33,6 +33,10 @@ namespace DnD
             start.TextColor = Color.DarkRed;
             start.Y = 140;
             this.Add(start);
+            start.Pressed += (object sender, EventArgs e) =>
+            {
+                GV.Engine.SetWorld(new ServerUI());
+            };
 
             portBox.OnEnter += (object sender, EventArgs e) => {
                 start.SetState(ButtonState.Pressed);

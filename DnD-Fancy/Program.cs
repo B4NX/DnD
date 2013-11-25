@@ -13,7 +13,7 @@ namespace DnD
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
-        static void Main()
+        public static void Main()
         {
             Engine Game = new Engine(new ServerConnectUI());
             Console.WriteLine(GV.Engine);
