@@ -60,20 +60,20 @@ namespace Networking {
                 serializer.Serialize(kvp.Value,b,head);
             }
         }
-        public static void SendToAll(Message m,Header[] head=null) {
+        public static void SendToAll(MessageOLD m,Header[] head=null) {
             foreach (KeyValuePair<string, NetworkStream> kvp in clients) {
                 serializer.Serialize(kvp.Value, m,head);
             }
         }
-        public static Queue<Message> writeQueue = new Queue<Message>();
+        public static Queue<MessageOLD> writeQueue = new Queue<MessageOLD>();
         public static void Update() {//r-s
             while (clients.Count != 0) {
                 try {
                     //Recieve
                     foreach (KeyValuePair<string, NetworkStream> kvp in clients) {
-                        Message m;
-                        m=(Message)serializer.Deserialize(ns);
-                        if (m.Header != Message.Head.EMPTY) {
+                        MessageOLD m;
+                        m=(MessageOLD)serializer.Deserialize(ns);
+                        if (m.Header != MessageOLD.Head.EMPTY) {
                             parseMessage(m);
                         }
                     }
@@ -81,7 +81,7 @@ namespace Networking {
                     if (writeQueue.Count != 0) {
                         SendToAll(writeQueue.Dequeue());
                     } else if (writeQueue.Count == 0) {
-                        SendToAll(new Message(Message.Head.EMPTY));
+                        SendToAll(new MessageOLD(MessageOLD.Head.EMPTY));
                     }
                 } catch (SocketException e) {
                     Debug.WriteLine(e);
@@ -92,14 +92,14 @@ namespace Networking {
                 }
             }
         }
-        public static Queue<Message> readQueue = new Queue<Message>();
+        public static Queue<MessageOLD> readQueue = new Queue<MessageOLD>();
 
         [Obsolete("Pass a Message instead")]
         public static void parseMessage(byte[] b) {
-            Console.WriteLine(new Message(Message.Head.LOG, b).ToString());
-            readQueue.Enqueue(new Message((Message.Head)b[0], b));
+            Console.WriteLine(new MessageOLD(MessageOLD.Head.LOG, b).ToString());
+            readQueue.Enqueue(new MessageOLD((MessageOLD.Head)b[0], b));
         }
-        public static void parseMessage(Message m) {
+        public static void parseMessage(MessageOLD m) {
             Console.WriteLine(m.ToString());
             readQueue.Enqueue(m);
         }

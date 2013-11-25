@@ -48,14 +48,18 @@
     <Compile Include="ClientNS.cs" />
     <Compile Include="Errors\InvalidMessageException.cs" />
     <Compile Include="Errors\WTFDidYouDoAndyException.cs" />
+    <Compile Include="IMessage.cs" />
     <Compile Include="Main.cs" />
+    <Compile Include="MessageOLD.cs" />
     <Compile Include="Message.cs" />
-    <Compile Include="MessageAbstract.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Server.cs" />
     <Compile Include="ServerNS.cs" />
   </ItemGroup>
   <ItemGroup />
+  <ItemGroup>
+    <Compile Include="Messages\LogMessage.cs" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

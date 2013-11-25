@@ -17,8 +17,8 @@ namespace Networking {
         private static byte[] buffer=new byte[256];
         public static Thread updateThread;
 
-        public static Queue<Message> writeQueue = new Queue<Message>();
-        public static Queue<Message> readQueue = new Queue<Message>();
+        public static Queue<MessageOLD> writeQueue = new Queue<MessageOLD>();
+        public static Queue<MessageOLD> readQueue = new Queue<MessageOLD>();
 
         private static NetworkStream ns;
         private static BinaryFormatter serializer = new BinaryFormatter();
@@ -50,27 +50,27 @@ namespace Networking {
         }
 
         private static byte[] readBuffer=new byte[256];
-        private static Queue<Message> nsQueue = new Queue<Message>();
+        private static Queue<MessageOLD> nsQueue = new Queue<MessageOLD>();
         public static void Update() {
             bool hasSocket = true;
             while (hasSocket) {
                 //Send
                 try {
                     if (writeQueue.Count != 0) {
-                        Message message=writeQueue.Dequeue();
+                        MessageOLD message=writeQueue.Dequeue();
                         //sock.Send(message.GetMessage);
                         serializer.Serialize(ns,message,null);
                         
                     }
                     else if (writeQueue.Count == 0) {
                         //sock.Send(new Message(Message.Head.EMPTY).GetMessage);
-                        serializer.Serialize(ns, new Message(Message.Head.EMPTY),null);
+                        serializer.Serialize(ns, new MessageOLD(MessageOLD.Head.EMPTY),null);
                     }
                     //Receive
                     //sock.Receive(readBuffer);
                     //Message m = new Message((Message.Head)readBuffer[0], readBuffer);
-                    Message m=(Message)serializer.Deserialize(ns);
-                    if (m.Header != Message.Head.EMPTY) {
+                    MessageOLD m=(MessageOLD)serializer.Deserialize(ns);
+                    if (m.Header != MessageOLD.Head.EMPTY) {
                         readQueue.Enqueue(m);
                     }
                 }

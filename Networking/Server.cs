@@ -59,8 +59,8 @@ namespace Networking {
                 kvp.Value.Send(b);
             }
         }
-        public static Queue<Message> writeQueue = new Queue<Message>();
-        public static Queue<Message> nsQueue = new Queue<Message>();
+        public static Queue<MessageOLD> writeQueue = new Queue<MessageOLD>();
+        public static Queue<MessageOLD> nsQueue = new Queue<MessageOLD>();
         public static void Update() {//r-s
             while (clients.Count!=0) {
                 try {
@@ -69,8 +69,8 @@ namespace Networking {
                         byte[] tempRead = new byte[256];
                         kvp.Value.Receive(tempRead);
 
-                        if (tempRead[0] != (byte)Message.Head.EMPTY) {
-                            nsQueue.Enqueue((Message)serializer.Deserialize(ns));
+                        if (tempRead[0] != (byte)MessageOLD.Head.EMPTY) {
+                            nsQueue.Enqueue((MessageOLD)serializer.Deserialize(ns));
                             //parseMessage(tempRead);
                             Console.WriteLine();
                         }
@@ -78,12 +78,12 @@ namespace Networking {
                     //ns.flsu
                     //Send
                     if (writeQueue.Count != 0) {
-                        Message m = writeQueue.Dequeue();
+                        MessageOLD m = writeQueue.Dequeue();
                         //SendToAll(writeQueue.Dequeue().GetMessage);
                         serializer.Serialize(ns, m, null);
                     } else if (writeQueue.Count == 0) {
                         //SendToAll(new Message(Message.Head.EMPTY).GetMessage);
-                        serializer.Serialize(ns, new Message(Message.Head.EMPTY), null);
+                        serializer.Serialize(ns, new MessageOLD(MessageOLD.Head.EMPTY), null);
                     }
                 } catch (SocketException e) {
                     Debug.WriteLine(e);
@@ -96,10 +96,10 @@ namespace Networking {
                 }
             }
         }
-        public static Queue<Message> readQueue = new Queue<Message>();
+        public static Queue<MessageOLD> readQueue = new Queue<MessageOLD>();
         public static void parseMessage(byte[] b) {
-            Console.WriteLine(new Message(Message.Head.LOG, b).ToString());
-            readQueue.Enqueue(new Message((Message.Head)b[0], b));
+            Console.WriteLine(new MessageOLD(MessageOLD.Head.LOG, b).ToString());
+            readQueue.Enqueue(new MessageOLD((MessageOLD.Head)b[0], b));
         }
         public static void Close() {
             List<string> toRemove = new List<string>();
