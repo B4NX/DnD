@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.Diagnostics;
 using System.Net;
 using System.Net.Sockets;
-using System.Diagnostics;
-using System.Threading;
-using System.Runtime.Serialization.Formatters.Binary;
 using System.Runtime.Remoting.Messaging;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.Threading;
 
 namespace Networking {
     public class ServerNS {
@@ -100,6 +98,7 @@ namespace Networking {
             readQueue.Enqueue(new MessageOLD((MessageOLD.Head)b[0], b));
         }
         public static void parseMessage(MessageOLD m) {
+            writeQueue.Enqueue(m);
             Console.WriteLine(m.ToString());
             readQueue.Enqueue(m);
         }

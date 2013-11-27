@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
+using System.Diagnostics;
 using System.Net;
 using System.Net.Sockets;
-using System.Diagnostics;
-using System.IO;
-using System.Threading;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.Threading;
 
 namespace Networking {
     public class ClientNS {
