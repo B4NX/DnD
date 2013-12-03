@@ -52,6 +52,7 @@
     <Compile Include="Main.cs" />
     <Compile Include="MessageOLD.cs" />
     <Compile Include="Message.cs" />
+    <Compile Include="Messages\BlankMessage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Server.cs" />
     <Compile Include="ServerNS.cs" />

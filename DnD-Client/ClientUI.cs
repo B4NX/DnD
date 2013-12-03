@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Networking;
 using System.Threading;
+using Networking.Messages;
 
 namespace DnD
 {
@@ -48,7 +49,7 @@ namespace DnD
             //append DM prefix and newline, then log it to the main string and textbox.
             msg = "[" + sender + "]: " + msg + Environment.NewLine;
             //Now send msg on to the server
-            ClientNS.writeQueue.Enqueue(Networking.Message.getLogMessage(msg));
+            ClientNS.writeQueue.Enqueue(new LogMessage(msg));
             Debug.WriteLine(ClientNS.writeQueue.Count);
         }
         public void LogUpdate() {

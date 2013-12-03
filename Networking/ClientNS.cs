@@ -16,8 +16,8 @@ namespace Networking {
         //private static byte[] buffer = new byte[256];
         public static Thread updateThread;
 
-        public static Queue<MessageOLD> writeQueue = new Queue<MessageOLD>();
-        public static Queue<MessageOLD> readQueue = new Queue<MessageOLD>();
+        public static Queue<Message> writeQueue = new Queue<Message>();
+        public static Queue<Message> readQueue = new Queue<Message>();
 
         public static void init() {
             serializer = new BinaryFormatter();
@@ -52,12 +52,12 @@ namespace Networking {
                 //Send
                 try {
                     if (writeQueue.Count != 0) {
-                        MessageOLD sm = writeQueue.Dequeue();
+                        Message sm = writeQueue.Dequeue();
                         serializer.Serialize(ns, sm);
                     }
                     //Receive
-                    MessageOLD m = (MessageOLD)serializer.Deserialize(ns);
-                    if (m.Header != MessageOLD.Head.EMPTY) {
+                    Message m = (Message)serializer.Deserialize(ns);
+                    if (m.Header != Message.Head.EMPTY) {
                         readQueue.Enqueue(m);
                     }
                 } catch (SocketException e) {

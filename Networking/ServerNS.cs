@@ -6,6 +6,7 @@ using System.Net.Sockets;
 using System.Runtime.Remoting.Messaging;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Threading;
+using Networking.Messages;
 
 namespace Networking {
     public class ServerNS {
@@ -52,26 +53,28 @@ namespace Networking {
             updateThread.Start();
             return client;
         }
-        [Obsolete("This method is obsolete, please SendToAll(Message m)")]
+
+        [Obsolete("This method is obsolete, use SendToAll(Message m)")]
         public static void SendToAll(byte[] b,Header[] head=null) {
             foreach (KeyValuePair<string, NetworkStream> kvp in clients) {
                 serializer.Serialize(kvp.Value,b,head);
             }
         }
-        public static void SendToAll(MessageOLD m,Header[] head=null) {
+
+        public static void SendToAll(Message m,Header[] head=null) {
             foreach (KeyValuePair<string, NetworkStream> kvp in clients) {
                 serializer.Serialize(kvp.Value, m,head);
             }
         }
-        public static Queue<MessageOLD> writeQueue = new Queue<MessageOLD>();
+        public static Queue<Message> writeQueue = new Queue<Message>();
         public static void Update() {//r-s
             while (clients.Count != 0) {
                 try {
                     //Recieve
                     foreach (KeyValuePair<string, NetworkStream> kvp in clients) {
-                        MessageOLD m;
-                        m=(MessageOLD)serializer.Deserialize(ns);
-                        if (m.Header != MessageOLD.Head.EMPTY) {
+                        Message m;
+                        m=(Message)serializer.Deserialize(ns);
+                        if (m.Header != Message.Head.EMPTY) {
                             parseMessage(m);
                         }
                     }
@@ -79,7 +82,7 @@ namespace Networking {
                     if (writeQueue.Count != 0) {
                         SendToAll(writeQueue.Dequeue());
                     } else if (writeQueue.Count == 0) {
-                        SendToAll(new MessageOLD(MessageOLD.Head.EMPTY));
+                        SendToAll(new BlankMessage());
                     }
                 } catch (SocketException e) {
                     Debug.WriteLine(e);
@@ -90,14 +93,9 @@ namespace Networking {
                 }
             }
         }
-        public static Queue<MessageOLD> readQueue = new Queue<MessageOLD>();
+        public static Queue<Message> readQueue = new Queue<Message>();
 
-        [Obsolete("Pass a Message instead")]
-        public static void parseMessage(byte[] b) {
-            Console.WriteLine(new MessageOLD(MessageOLD.Head.LOG, b).ToString());
-            readQueue.Enqueue(new MessageOLD((MessageOLD.Head)b[0], b));
-        }
-        public static void parseMessage(MessageOLD m) {
+        public static void parseMessage(Message m) {
             writeQueue.Enqueue(m);
             Console.WriteLine(m.ToString());
             readQueue.Enqueue(m);

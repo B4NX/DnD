@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Threading;
 using Networking;
+using Networking.Messages;
 
 namespace DnD {
     public partial class ServerUI : MainUI {
@@ -33,7 +34,7 @@ namespace DnD {
             adventureLog += msg;
             adventureLogBox.Text += msg;
             Console.WriteLine(msg);
-            Networking.ServerNS.SendToAll(new Networking.Message(Networking.Message.Head.LOG, msg));
+            Networking.ServerNS.SendToAll(new LogMessage(msg));
         }
 
         private void Application_Idle(object sender, EventArgs e) {
@@ -43,7 +44,7 @@ namespace DnD {
                 //Debug.WriteLine("something on the queue (len " + readUIQueue.Count + ")! it's " + msg);
                 adventureLog += msg;
                 adventureLogBox.Text += msg;
-                Networking.ServerNS.SendToAll(Networking.Message.getLogMessage(msg));
+                Networking.ServerNS.SendToAll(new LogMessage(msg));
             }
         }
         private void Donaudampfschiffahrtsgesellschaft() {

@@ -6,7 +6,7 @@ using System.Text;
 namespace Networking {
     [Serializable]
     public abstract class Message {
-        protected enum Head {
+        public enum Head {
             EMPTY,
             STAT,
             LOG,
@@ -16,5 +16,11 @@ namespace Networking {
             NPC
         };
         protected Head header;
+
+        public Head Header {
+            get {
+                return this.header;
+            }
+        }
     }
 }
