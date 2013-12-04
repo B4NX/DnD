@@ -17,9 +17,9 @@ namespace DnD
 
             //this.BackgroundColor = Color.Black;
 
-            Entity title = new Entity(new PointF(0, -100), new Size(512, 250), new Texture(Resources.Logo));
-            title.Parallax = new PointF(0, 0);
-            this.Add(title);
+            //Entity title = new Entity(new PointF(0, -100), new Size(512, 250), new Texture(Resources.Logo));
+            //title.Parallax = new PointF(0, 0);
+            //this.Add(title);
         }
 
         public override void Update(OpenTK.FrameEventArgs e)
