@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 
 namespace Networking {
+    [Serializable]
     public abstract class Message {
         public enum Head {
             EMPTY,
