@@ -47,7 +47,6 @@
     <Compile Include="Client.cs" />
     <Compile Include="ClientNS.cs" />
     <Compile Include="Errors\InvalidMessageException.cs" />
-    <Compile Include="Errors\WTFDidYouDoAndyException.cs" />
     <Compile Include="IMessage.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="MessageOLD.cs" />

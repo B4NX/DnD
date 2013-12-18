@@ -74,12 +74,15 @@ namespace Networking {
                     foreach (KeyValuePair<string, NetworkStream> kvp in clients) {
                         Message m;
                         m=(Message)serializer.Deserialize(ns);
+                        Message m = writeQueue.Dequeue();
+                        Debug.WriteLine("Recieved: "+m);
                         if (m.Header != Message.Head.EMPTY) {
                             parseMessage(m);
                         }
                     }
                     //Send
                     if (writeQueue.Count != 0) {
+                        Debug.WriteLine("Sent: " + m);
                         SendToAll(writeQueue.Dequeue());
                     } else if (writeQueue.Count == 0) {
                         SendToAll(new BlankMessage());

@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 
 namespace Networking.Messages {
+    [Serializable]
     public class LogMessage:Message{
         private string message;
-        public bool isShrinkWrapped = false;
 
         private LogMessage() {
             this.header = Head.LOG;
@@ -21,10 +21,8 @@ namespace Networking.Messages {
             createMessage(s);
         }
 
-        public bool IsShrinkWrapped {
-            get {
-                throw new WTFDidYouDoAndyException();
-            }
+        public override string ToString() {
+            return base.ToString() + ": " + this.message;
         }
     }
 }
